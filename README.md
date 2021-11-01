@@ -176,6 +176,13 @@ http://camaleon.tuzitio.com/store/plugins
 * bundle _2.1.4_ install
 * bundle lock --add-platform x86_64-linux
 * git push heroku master
+* Camaleon CMS Installation and database structure
+
+  ```bash
+  heroku rails generate camaleon_cms:install
+  heroku rake camaleon_cms:generate_migrations
+  heroku rake db:migrate
+  ```
 
 ## Sample App / Demonstration
 * [Camaleon Server (current version)](http://camaleon.tuzitio.com/plugins/demo_manage/)
