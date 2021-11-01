@@ -157,7 +157,21 @@ http://camaleon.tuzitio.com/store/plugins
 
 ## Deploy in Heroku
 * heroku create --stack heroku-18
+* Make sure sqlite gem and pg gem are in right groups
+
+  ```bash
+  group :production do
+    gem 'pg'
+  end
+
+  group :development, :test do
+    gem 'sqlite3'
+    # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+    gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  end
+  ```
 * In production.rb --> config.assets.js_compressor = Uglifier.new(harmony: true)
+* rm Gemfile.lock
 * gem install bundler -v 2.1.4
 * bundle _2.1.4_ install
 * bundle lock --add-platform x86_64-linux
