@@ -53,7 +53,7 @@ class CamaleonCmsAwsUploader < CamaleonCmsUploader
     if is_private_uploader?
       url = is_dir ? '' : File.basename(key)
     else
-      url = is_dir ? '' : (@cloudfront.present? ? File.join(@cloudfront, key) : s3_file.public_url)
+      url = is_dir ? '' : s3_file.public_url
     end
 
     res = {
