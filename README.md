@@ -113,7 +113,7 @@ http://camaleon.tuzitio.com/store/plugins
 * Create your rails project
 
   ```bash
-  rails new my_project
+  rails _5.2.6_ new my_project
   ```
 * Add the gem in your Gemfile
 
