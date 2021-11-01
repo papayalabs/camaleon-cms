@@ -124,7 +124,7 @@ class CamaleonCmsAwsUploader < CamaleonCmsUploader
   # return: (AWS Bucket object)
   def bucket
     @bucket ||= lambda{
-      config = Aws.config.update({ region: @aws_region, credentials: Aws::Credentials.new(@aws_akey, @aws_asecret) })
+      config = Aws.config.update({ endpoint: 'https://sfo3.digitaloceanspaces.com', region: @aws_region, credentials: Aws::Credentials.new(@aws_akey, @aws_asecret) })
       s3 = Aws::S3::Resource.new
       bucket = s3.bucket(@aws_bucket)
     }.call
