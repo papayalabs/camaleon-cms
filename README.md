@@ -153,6 +153,14 @@ http://camaleon.tuzitio.com/store/plugins
 
 * Go to your browser and visit http://localhost:3000/
 
+## Deploy in Heroku
+* heroku create --stack heroku-18
+* In production.rb --> config.assets.js_compressor = Uglifier.new(harmony: true)
+* gem install bundler -v 2.1.4
+* bundle _2.1.4_ install
+* bundle lock --add-platform x86_64-linux
+* git push heroku master
+
 ## Sample App / Demonstration
 * [Camaleon Server (current version)](http://camaleon.tuzitio.com/plugins/demo_manage/)
 * [Sample App](https://github.com/owen2345/Camaleon-CMS-Sample)
