@@ -113,8 +113,10 @@ http://camaleon.tuzitio.com/store/plugins
 * Create your rails project
 
   ```bash
-  rails _5.2.6_ new my_project
+  rails _5.2.6_ new theturtlefoundation
   ```
+* cd theturtlefoundation
+* nano Gemfile
 * Add the gem in your Gemfile
 
   ```ruby
