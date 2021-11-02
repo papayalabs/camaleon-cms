@@ -170,7 +170,14 @@ http://camaleon.tuzitio.com/store/plugins
     gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   end
   ```
-* In production.rb --> config.assets.js_compressor = Uglifier.new(harmony: true)
+* In production.rb:
+
+  ```bash
+  config.assets.js_compressor = Uglifier.new(harmony: true)
+  config.assets.compile = true
+  config.assets.precompile << /\.(?:svg|eot|woff|woff2|ttf)\z/ (application.rb also)
+  ```
+
 * rm Gemfile.lock
 * gem install bundler -v 2.1.4
 * bundle _2.1.4_ install
