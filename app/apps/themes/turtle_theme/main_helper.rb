@@ -18,8 +18,15 @@ module Themes::TurtleTheme::MainHelper
        group.add_field({"name"=>"Button Description", "slug"=>"home_slider_button_description"},{field_key: "text_box"})
        group.add_field({"name"=>"Button URL", "slug"=>"home_slider_button_url"},{field_key: "url"})
        group.add_field({"name"=>"Background image", "slug"=>"home_slider_bg_image"},{field_key: "image"})
-     end
-
+      end
+    unless theme.get_field_groups.where(slug: "home_main").any?
+      group = theme.add_custom_field_group({name: "Home Main", slug: "home_main", description: ""})
+      group.add_manual_field({"name"=>"Home Background color", "slug"=>"home_main_bg_color"},{field_key: "colorpicker", required: true})
+      group.add_manual_field({"name"=>"Home Links color", "slug"=>"home_main_links_color"},{field_key: "colorpicker", required: true})
+      group.add_manual_field({"name"=>"Home Main About", "slug"=>"home_main_about"},{field_key: "editor", translate: true})
+      group.add_manual_field({"name"=>"Home Main News Title", "slug"=>"home_main_news_title"},{field_key: "text_box", translate: true})
+      group.add_manual_field({"name"=>"Home Main News Description", "slug"=>"home_main_news_description"},{field_key: "editor", translate: true})
+    end
     # # Sample Meta Value
     # theme.set_meta("installed_at", Time.current.to_s) # save a custom value
   end
