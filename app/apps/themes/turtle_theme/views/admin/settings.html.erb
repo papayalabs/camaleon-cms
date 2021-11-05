@@ -16,6 +16,6 @@
 </div>
 
 <div class="form-group">
-    <%= label_tag nil, 'Map Location (Iframe)' %> <br><small>Sample: <code>&lt;iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2564.958900464012!2..." frameborder="0" style="border:0" allowfullscreen="">&lt;/iframe&gt;</code></small>
+    <%= label_tag nil, 'Map Location (Iframe)' %> <br><small>Sample: <code>https://maps.google.com/maps?q=Lecheria&t=&z=13&ie=UTF8&iwloc=&output=embed</code></small>
     <%= text_field_tag 'theme_option[map_url]', current_theme.get_option('map_url'), class: 'form-control' %>
 </div>

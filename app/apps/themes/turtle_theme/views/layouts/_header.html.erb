@@ -8,30 +8,24 @@
                         <div class="logo">
                             <a href="<%= current_site.the_url %>"><img src="<%= current_site.the_logo(theme_asset_url('img/logo/logo.png')) %>" alt=" " /></a>
                         </div>
+                        
                     </div>
                     <div class="col-xl-10 col-lg-10">
                         <div class="menu-wrapper  d-flex align-items-center justify-content-end">
                             <!-- Main-menu -->
                             <div class="main-menu d-none d-lg-block">
                                 <nav>
-                                    <ul id="navigation">                                                                                          
-                                        <li><a href="index.html">Home</a></li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="projects.html">Projects</a></li>
-                                        <li><a href="blog.html">Noticias</a>
-                                            <ul class="submenu">
-                                                <li><a href="/post">Blog</a></li>
-                                                <li><a href="/sample-post">Blog Details</a></li>
-                                                <li><a href="elements.html">Element</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                    <ul id="navigation">
+                                        <% cama_menu_parse_items(current_site.nav_menus.find_by_slug('main_menu').children).each do |item| %>
+                                            <li><a href="<%= item[:url] %>"><%= item[:label] %></a></li>
+                                        <% end %>                                                                                          
+                                        <li><%= raw current_site.draw_languages("language list-inline pull-right", true) %></li>
                                     </ul>
                                 </nav>
                             </div>
                             <!-- Header-btn -->
                             <div class="header-right-btn d-none d-lg-block ml-20">
-                                <a href="contact.html" class="btn header-btn">Make a Donation</a>
+                                <a href="/contact" class="btn header-btn">Make a Donation</a>
                             </div>
                         </div>
                     </div> 
