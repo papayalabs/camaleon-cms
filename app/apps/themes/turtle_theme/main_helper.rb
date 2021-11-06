@@ -12,10 +12,10 @@ module Themes::TurtleTheme::MainHelper
     # # Sample Custom Field
     unless theme.get_field_groups.where(slug: "slider").any?
        group = theme.add_field_group({name: "Slider Settings", is_repeat: true, slug: "slider", description: ""})
-       group.add_field({"name"=>"Title", "slug"=>"home_slider_title"},{field_key: "text_box"})
-       group.add_field({"name"=>"Description", "slug"=>"home_slider_description"},{field_key: "text_box"})
+       group.add_field({"name"=>"Title", "slug"=>"home_slider_title"},{field_key: "text_box", translate: true})
+       group.add_field({"name"=>"Description", "slug"=>"home_slider_description"},{field_key: "text_box", translate: true})
        group.add_field({"name"=>"Display Button", "slug"=>"home_slider_display_button"},{field_key: "checkbox"})
-       group.add_field({"name"=>"Button Description", "slug"=>"home_slider_button_description"},{field_key: "text_box"})
+       group.add_field({"name"=>"Button Description", "slug"=>"home_slider_button_description"},{field_key: "text_box", translate: true})
        group.add_field({"name"=>"Button URL", "slug"=>"home_slider_button_url"},{field_key: "url"})
        group.add_field({"name"=>"Background image", "slug"=>"home_slider_bg_image"},{field_key: "image"})
     end
@@ -26,6 +26,11 @@ module Themes::TurtleTheme::MainHelper
       group.add_manual_field({"name"=>"Home Main About", "slug"=>"home_main_about"},{field_key: "editor", translate: true})
       group.add_manual_field({"name"=>"Home Main News Title", "slug"=>"home_main_news_title"},{field_key: "text_box", translate: true})
       group.add_manual_field({"name"=>"Home Main News Description", "slug"=>"home_main_news_description"},{field_key: "editor", translate: true})
+      group.add_manual_field({"name"=>"Home Main Donations", "slug"=>"home_main_donation"},{field_key: "text_box", translate: true})
+      group.add_manual_field({"name"=>"Home Main Get in Touch", "slug"=>"home_main_get_in_touch"},{field_key: "text_box", translate: true})
+      group.add_manual_field({"name"=>"Home Main Map of the Site", "slug"=>"home_main_site_map"},{field_key: "text_box", translate: true})
+      group.add_manual_field({"name"=>"Home Main Categories", "slug"=>"home_main_categories"},{field_key: "text_box", translate: true})
+      group.add_manual_field({"name"=>"Home Main Contact us", "slug"=>"home_main_contact_us"},{field_key: "text_box", translate: true})
     end
     unless theme.get_field_groups.where(slug: "social_networks").any?
       group = theme.add_field_group({name: "Social Networks", is_repeat: true, slug: "social_networks", description: ""})

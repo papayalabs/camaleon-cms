@@ -27,7 +27,7 @@
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4">
                     <div class="single-footer-caption mb-50">
                         <div class="footer-tittle">
-                            <h4>Mapa del Sitio</h4>
+                            <h4><%= current_theme.the_field('home_main_site_map', 'Map of the site') %></h4>
                             <ul>
                                 <% cama_menu_parse_items(current_site.nav_menus.find_by_slug('main_menu').children).each do |item| %>
                                     <li><a href="<%= item[:url] %>"><%= item[:label] %></a></li>
@@ -39,7 +39,7 @@
                 <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4">
                     <div class="single-footer-caption mb-50">
                         <div class="footer-tittle">
-                            <h4>Categorias</h4>
+                            <h4><%= current_theme.the_field('home_main_categories', 'Categories') %></h4>
                             <ul>
                             <% current_site.the_categories.decorate.each do |item| %>
                                 <li><a href="<%= item.the_url %>"><%= item.the_title %></a></li>
@@ -51,7 +51,7 @@
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-4">
                     <div class="single-footer-caption mb-50">
                         <div class="footer-tittle">
-                            <h4>Contact us</h4>
+                            <h4><%= current_theme.the_field('home_main_contact_us', 'Contact us') %></h4>
                             <ul>
                                 <li><a href="mailto:<%= current_theme.get_option('email_info', 'default_email@example.com') %>"><%= current_theme.get_option('email_info', 'default_email@example.com') %></a></li>
                                 <li><a href="#"><%= current_theme.get_option('address_info', 'New York') %></a></li>
@@ -73,7 +73,6 @@
                         <div class="footer-copy-right text-center">
                             <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This web is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="http://papayalabs.io" target="_blank">PapayaLabs OÜ</a>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                             </div>
                         </div>
                     </div>
