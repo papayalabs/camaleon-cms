@@ -65,22 +65,21 @@
                 <div class="media contact-info">
                     <span class="contact-info__icon"><i class="ti-home"></i></span>
                     <div class="media-body">
-                        <h3>Buttonwood, California.</h3>
-                        <p>Rosemead, CA 91770</p>
+                        <h3><%= current_theme.get_option('address_info', 'New York') %></h3>
                     </div>
                 </div>
                 <div class="media contact-info">
                     <span class="contact-info__icon"><i class="ti-tablet"></i></span>
                     <div class="media-body">
-                        <h3>+1 253 565 2365</h3>
-                        <p>Mon to Fri 9am to 6pm</p>
+                        <h3><%= current_theme.get_option('phone_info', '58 (0281) 2810000') %></h3>
+                        <p>Lunes a Viernes de 9am a 6pm</p>
                     </div>
                 </div>
                 <div class="media contact-info">
                     <span class="contact-info__icon"><i class="ti-email"></i></span>
                     <div class="media-body">
-                        <h3>support@colorlib.com</h3>
-                        <p>Send us your query anytime!</p>
+                        <h3><%= current_theme.get_option('email_info', 'default_email@example.com') %></h3>
+                        <p>Envianos un email cuando quieras!</p>
                     </div>
                 </div>
             </div>
