@@ -41,7 +41,8 @@ class PostTableIntoUtf8 < CamaManager.migration_class
       t.belongs_to :user, index: true#, foreign_key: true
     end
 
-    create_table "#{PluginRoutes.static_system_info["db_prefix"]}posts" do |t|
+    create_table "#{PluginRoutes.static_system_info["db_prefix"]}posts", :id => false do |t|
+      t.string   "id", :limit => 36, :primary => true
       t.string   "title"
       t.string   "slug", index: true
       t.text     "content",          limit: 1073741823
@@ -49,7 +50,7 @@ class PostTableIntoUtf8 < CamaManager.migration_class
       t.string   "status", default: "published", index: true
       t.integer  "comment_count", default: 0
       t.datetime "published_at"
-      t.integer  "post_parent", index: true
+      t.string   "post_parent", index: true
       t.string   "visibility", default: "public"
       t.text     "visibility_value"
       t.string   "post_class", default: "Post", index: true

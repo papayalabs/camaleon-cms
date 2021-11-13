@@ -1,8 +1,9 @@
 module CamaleonCms
-  class PostDefault < ActiveRecord::Base
+  class PostDefault < ApplicationRecord
     include CamaleonCms::Metas
     include CamaleonCms::CustomFieldsRead
 
+    self.primary_key = 'id' 
     self.table_name = "#{PluginRoutes.static_system_info["db_prefix"]}posts"
 
     # attr_accessible :user_id, :title, :slug, :content, :content_filtered, :status,  :visibility, :visibility_value, :post_order, :post_type_key, :taxonomy_id, :published_at, :post_parent, :post_order, :is_feature
