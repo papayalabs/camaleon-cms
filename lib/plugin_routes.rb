@@ -162,7 +162,7 @@ class PluginRoutes
 
   # return all enabled plugins []
   def self.enabled_plugins(site)
-    r = cache_variable("enable_plugins_site_#{site.slug}")
+    r = cache_variable("enable_plugins_site_#{site.id.tr('-','')[0,4]}")
     return r unless r.nil?
     res = []
     enabled_ps = site.plugins.active.pluck(:slug)
@@ -170,17 +170,17 @@ class PluginRoutes
       res << plugin if enabled_ps.include?(plugin["key"])
     end
     res = res.sort_by{|e| e["position"] || 10 }
-    cache_variable("enable_plugins_site_#{site.slug}", res)
+    cache_variable("enable_plugins_site_#{site.id.tr('-','')[0,4]}", res)
   end
 
   # return all enabled apps for site (themes + system + plugins) []
   # theme_slug: current theme slug
   def self.enabled_apps(site, theme_slug = nil)
     theme_slug = theme_slug || site.get_theme_slug
-    r = cache_variable("enabled_apps_#{site.slug}_#{theme_slug}")
+    r = cache_variable("enabled_apps_#{site.id.tr('-','')[0,4]}_#{theme_slug}")
     return r unless r.nil?
     res = [system_info] + enabled_plugins(site) + [theme_info(theme_slug)]
-    cache_variable("enabled_apps_#{site.slug}_#{theme_slug}", res)
+    cache_variable("enabled_apps_#{site.id.tr('-','')[0,4]}_#{theme_slug}", res)
   end
 
   # return all enabled apps as []: system, themes, plugins
