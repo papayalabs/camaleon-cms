@@ -1,8 +1,9 @@
 module CamaleonCms
-  class TermTaxonomy < ActiveRecord::Base
+  class TermTaxonomy < CamaleonCms::ApplicationRecord
     include CamaleonCms::Metas
     include CamaleonCms::CustomFieldsRead
 
+    self.primary_key = 'id'
     self.table_name = "#{PluginRoutes.static_system_info["db_prefix"]}term_taxonomy"
     # attr_accessible :taxonomy, :description, :parent_id, :count, :name, :slug, :term_group, :status, :term_order, :user_id
     # attr_accessible :data_options

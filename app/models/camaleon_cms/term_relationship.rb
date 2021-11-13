@@ -1,5 +1,7 @@
 module CamaleonCms
-  class TermRelationship < ActiveRecord::Base
+  class TermRelationship < CamaleonCms::ApplicationRecord
+
+    self.primary_key = 'id'
     self.table_name = "#{PluginRoutes.static_system_info['db_prefix']}term_relationships"
     default_scope ->{ order(term_order: :asc) }
 

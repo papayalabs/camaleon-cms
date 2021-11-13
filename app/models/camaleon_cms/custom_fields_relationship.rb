@@ -1,5 +1,7 @@
 module CamaleonCms
-  class CustomFieldsRelationship < ActiveRecord::Base
+  class CustomFieldsRelationship < CamaleonCms::ApplicationRecord
+
+    self.primary_key = 'id'
     self.table_name = "#{PluginRoutes.static_system_info['db_prefix']}custom_fields_relationships"
 
     # attr_accessible :objectid, :custom_field_id, :term_order, :value, :object_class,

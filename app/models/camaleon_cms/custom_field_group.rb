@@ -1,6 +1,6 @@
 module CamaleonCms
   class CustomFieldGroup < CamaleonCms::CustomField
-    self.primary_key = :id
+    self.primary_key = 'id'
     # attrs required: name, slug, description
     alias_attribute :site_id, :parent_id
 

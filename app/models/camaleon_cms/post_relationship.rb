@@ -1,6 +1,8 @@
 
 # DEPRECATED MODEL, NOT USED ANY MORE
-class CamaleonCms::PostRelationship < ActiveRecord::Base
+class CamaleonCms::PostRelationship < CamaleonCms::ApplicationRecord
+
+  self.primary_key = 'id'
   self.table_name = "#{PluginRoutes.static_system_info["db_prefix"]}term_relationships"
   # attr_accessible :objectid, :term_taxonomy_id, :term_order
   default_scope ->{ order(term_order: :asc) }

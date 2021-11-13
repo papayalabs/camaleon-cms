@@ -1,8 +1,8 @@
 module CamaleonCms
-  class CustomField < ActiveRecord::Base
+  class CustomField < CamaleonCms::ApplicationRecord
     include CamaleonCms::Metas
 
-    self.primary_key = :id
+    self.primary_key = 'id'
     self.table_name = "#{PluginRoutes.static_system_info['db_prefix']}custom_fields"
 
     alias_attribute :label, :name
