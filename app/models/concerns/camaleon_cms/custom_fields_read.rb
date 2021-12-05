@@ -34,7 +34,7 @@ module CamaleonCms::CustomFieldsRead extend ActiveSupport::Concern
         self.post_type.get_field_groups(class_name)
       when 'Post'
         if self.term_relationships.size.zero? && args[:cat_ids].nil?
-          CamaleonCms::CustomFieldGroup.where("(objectid = ? AND object_class = ?) OR (objectid = ? AND object_class = ?)", self.id || "-1", class_name, self.post_type.id, "PostType_#{class_name}")
+          CamaleonCms::CustomFieldGroup.where("(objectid = ? AND object_class = ?) OR (objectid = ? AND object_class = ?)", self.id, class_name, self.post_type.id, "PostType_#{class_name}")
         else
           cat_ids = self.categories.map(&:id)
           cat_ids += args[:cat_ids] unless args[:cat_ids].nil?
@@ -42,7 +42,7 @@ module CamaleonCms::CustomFieldsRead extend ActiveSupport::Concern
           CamaleonCms::CustomFieldGroup.where("(objectid = ? AND object_class = ?) OR
                                                (objectid = ? AND object_class = ?) OR
                                                (objectid IN (?) AND object_class = ?)",
-                                              self.id || "-1", class_name,
+                                              self.id, class_name,
                                               self.post_type.id, "PostType_#{class_name}",
                                               cat_ids, "Category_#{class_name}")
         end
