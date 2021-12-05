@@ -4,8 +4,8 @@ class PostTableIntoUtf8 < CamaManager.migration_class
       add_column(CamaleonCms::User.table_name, :email, :string) unless column_exists?(CamaleonCms::User.table_name, :email)
       add_column(CamaleonCms::User.table_name, :username, :string) unless column_exists?(CamaleonCms::User.table_name, :username)
       add_column(CamaleonCms::User.table_name, :role, :string, default: 'client', index: true) unless column_exists?(CamaleonCms::User.table_name, :role)
-      add_column(CamaleonCms::User.table_name, :parent_id, :integer) unless column_exists?(CamaleonCms::User.table_name, :parent_id)
-      add_column(CamaleonCms::User.table_name, :site_id, :integer, index: true, default: -1) unless column_exists?(CamaleonCms::User.table_name, :site_id)
+      add_column(CamaleonCms::User.table_name, :parent_id, :string) unless column_exists?(CamaleonCms::User.table_name, :parent_id)
+      add_column(CamaleonCms::User.table_name, :site_id, :string, index: true, default: -1) unless column_exists?(CamaleonCms::User.table_name, :site_id)
       add_column(CamaleonCms::User.table_name, :auth_token, :string) unless column_exists?(CamaleonCms::User.table_name, :auth_token)
     else
       create_table CamaleonCms::User.table_name, :id => false do |t|
@@ -23,7 +23,7 @@ class PostTableIntoUtf8 < CamaManager.migration_class
 
         # t.integer  "site_id",   default: -1, index: true
         t.timestamps null: false
-        t.belongs_to :site, index: true, default: -1#, foreign_key: true
+        t.string  "site_id", index: true, default: -1#, foreign_key: true
       end
     end
 
@@ -40,7 +40,7 @@ class PostTableIntoUtf8 < CamaManager.migration_class
       t.string   "status"
 
       t.timestamps null: false
-      t.belongs_to :user, index: true#, foreign_key: true
+      t.string   "user_id", index: true#, foreign_key: true
     end
 
     create_table "#{PluginRoutes.static_system_info["db_prefix"]}posts", :id => false do |t|
@@ -58,14 +58,15 @@ class PostTableIntoUtf8 < CamaManager.migration_class
       t.string   "post_class", default: "Post", index: true
 
       t.timestamps null: false
-      t.belongs_to :user, index: true#, foreign_key: true
+      t.string   "user_id", index: true#, foreign_key: true
     end
 
     create_table "#{PluginRoutes.static_system_info["db_prefix"]}term_relationships", :id => false do |t|
       t.string   "id", :limit => 36, :primary => true
       t.string "objectid", index: true
       t.integer "term_order", index: true
-      t.belongs_to :term_taxonomy, index: true
+      t.string  "term_taxonomy_id", index: true
+      t.timestamps null: false
     end
 
     create_table "#{PluginRoutes.static_system_info["db_prefix"]}user_relationships", :id => false do |t|
@@ -73,8 +74,9 @@ class PostTableIntoUtf8 < CamaManager.migration_class
       t.integer "term_order"
       t.integer "active", default: 1
 
-      t.belongs_to :term_taxonomy, index: true
-      t.belongs_to :user, index: true
+      t.string  "term_taxonomy_id", index: true
+      t.string  "user_id", index: true
+      t.timestamps null: false
     end
 
     create_table "#{PluginRoutes.static_system_info["db_prefix"]}comments", :id => false do |t|
@@ -88,8 +90,8 @@ class PostTableIntoUtf8 < CamaManager.migration_class
       t.string   "agent"
       t.string   "typee"
       t.integer  "comment_parent", index: true
-      t.belongs_to :post, index: true#, foreign_key: true
-      t.belongs_to :user, index: true#, foreign_key: true
+      t.string   "post_id", index: true#, foreign_key: true
+      t.string   "user_id", index: true#, foreign_key: true
       t.timestamps null: false
     end
 
@@ -105,6 +107,7 @@ class PostTableIntoUtf8 < CamaManager.migration_class
       t.boolean "is_repeat", default: false
       t.text    "description"
       t.string  "status"
+      t.timestamps null: false
     end
 
     create_table "#{PluginRoutes.static_system_info["db_prefix"]}custom_fields_relationships", :id => false do |t|
@@ -115,6 +118,7 @@ class PostTableIntoUtf8 < CamaManager.migration_class
       t.string  "object_class", index: true
       t.text    "value", limit: 1073741823
       t.string  "custom_field_slug", index: true
+      t.timestamps null: false
     end
 
     create_table "#{PluginRoutes.static_system_info["db_prefix"]}metas", :id => false do |t|
@@ -123,6 +127,7 @@ class PostTableIntoUtf8 < CamaManager.migration_class
       t.text    "value", limit: 1073741823
       t.string "objectid", index: true
       t.string  "object_class", index: true
+      t.timestamps null: false
     end
 
     if ActiveRecord::Base.connection.adapter_name.downcase.include?("mysql")
