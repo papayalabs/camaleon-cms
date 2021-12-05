@@ -25,7 +25,6 @@ module CamaleonCms::CategoriesTagsForPosts extend ActiveSupport::Concern
   # cats: (Array) array of category ids assigned for this post, sample: [1,2,3]
   def update_categories(cats=[])
     rescue_extra_data
-    cats = cats.to_i
     old_categories = categories.pluck("#{CamaleonCms::TermTaxonomy.table_name}.id")
     delete_categories = old_categories - cats
     news_categories =  cats - old_categories
@@ -56,7 +55,7 @@ module CamaleonCms::CategoriesTagsForPosts extend ActiveSupport::Concern
   # Assign this post for category with id: category_id
   # categories_id: (Array) array of category ids assigned for this post, sample: [1,2,3]
   def assign_category(categories_id)
-    categories_id = [categories_id] if categories_id.is_a?(Integer)
+    categories_id = [categories_id] if categories_id.is_a?(String)
     rescue_extra_data
     categories_id.each do |key|
       term_relationships.where(:term_taxonomy_id => key).first_or_create!
@@ -67,7 +66,7 @@ module CamaleonCms::CategoriesTagsForPosts extend ActiveSupport::Concern
   # Assign this post for category with id: category_id
   # categories_id: (Array) array of category ids assigned for this post, sample: [1,2,3]
   def unassign_category(categories_id)
-    categories_id = [categories_id] if categories_id.is_a?(Integer)
+    categories_id = [categories_id] if categories_id.is_a?(String)
     rescue_extra_data
     term_relationships.where(:term_taxonomy_id => categories_id).destroy_all
     update_counters("categories")
