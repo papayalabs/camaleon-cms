@@ -6,6 +6,12 @@
                 <div class="col-xl-12">
                     <div class="hero-cap hero-cap2 pt-70">
                         <h2><%= @category.the_title %></h2>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/"><%= current_theme.the_field('common_word_categories', 'Categories') %></a></li>
+                                <li class="breadcrumb-item"><a href="#"><%= @category.the_title %></a></li> 
+                            </ol>
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -19,50 +25,7 @@
         <div class="row">
             <div class="col-lg-8 mb-5 mb-lg-0">
                 <div class="blog_left_sidebar">
-                    <% @posts.decorate.each do |post| %>
-                        <article class="blog_item">
-                            <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="<%= post.the_thumb_url(theme_asset_url('img/blog/single_blog_1.png')) %>" alt="">
-                                <a href="<%= post.the_url %>" class="blog_item_date">
-                                    <%= post.the_field('date', '') %>
-                                    <% months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"] %>
-                                    <h3><%= DateTime.parse(post.the_field('post-date', '').to_s+" 12:00AM").day %></h3>
-                                    <p><%= months[DateTime.parse(post.the_field('post-date', '').to_s+" 12:00AM").month.to_i - 1] %></p>
-                                    <p><%= DateTime.parse(post.the_field('post-date', '').to_s+" 12:00AM").year %></p>
-                                </a>
-                            </div>
-                            <div class="blog_details">
-                                <a class="d-inline-block" href="<%= post.the_url %>">
-                                    <h2 class="blog-head" style="color: #2d2d2d;"><%= post.the_title %></h2>
-                                </a>
-                                <p><%= post.the_excerpt %></p>
-                                <ul class="blog-info-link">
-                                    <li><a href="#"><i class="fa fa-user"></i><%= post.the_author.fullname %></a></li>
-                                    <li><a href="#"><i class="fa fa-comments"></i><%= post.the_comments.count %> Comments</a></li>
-                                </ul>
-                            </div>
-                        </article>
-                    <% end %>
-                    <nav class="blog-pagination justify-content-center d-flex">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a href="#" class="page-link" aria-label="Previous">
-                                    <i class="ti-angle-left"></i>
-                                </a>
-                            </li>
-                            <li class="page-item">
-                                <a href="#" class="page-link">1</a>
-                            </li>
-                            <li class="page-item active">
-                                <a href="#" class="page-link">2</a>
-                            </li>
-                            <li class="page-item">
-                                <a href="#" class="page-link" aria-label="Next">
-                                    <i class="ti-angle-right"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+                    <%= render partial: 'partials/post_list' %>
                 </div>
             </div>
             <div class="col-lg-4">

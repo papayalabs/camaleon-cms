@@ -32,6 +32,15 @@ module Themes::TurtleTheme::MainHelper
       group.add_manual_field({"name"=>"Home Main Categories", "slug"=>"home_main_categories"},{field_key: "text_box", translate: true})
       group.add_manual_field({"name"=>"Home Main Contact us", "slug"=>"home_main_contact_us"},{field_key: "text_box", translate: true})
     end
+    unless theme.get_field_groups.where(slug: "common_words").any?
+      group = theme.add_custom_field_group({name: "Common Words", slug: "common_words", description: ""})
+      group.add_manual_field({"name"=>"Categories", "slug"=>"common_word_categories"},{field_key: "text_box", translate: true})
+      group.add_manual_field({"name"=>"News", "slug"=>"common_word_news"},{field_key: "text_box", translate: true})
+      group.add_manual_field({"name"=>"Tags", "slug"=>"common_word_tags"},{field_key: "text_box", translate: true})
+      group.add_manual_field({"name"=>"Recents", "slug"=>"common_word_recents"},{field_key: "text_box", translate: true})
+      group.add_manual_field({"name"=>"Home", "slug"=>"common_word_home"},{field_key: "text_box", translate: true})              
+      group.add_manual_field({"name"=>"Details", "slug"=>"common_word_details"},{field_key: "text_box", translate: true})
+    end  
     unless theme.get_field_groups.where(slug: "social_networks").any?
       group = theme.add_field_group({name: "Social Networks", is_repeat: true, slug: "social_networks", description: ""})
       group.add_field({"name"=>"Class", "slug"=>"social_network_class"},{field_key: "text_box"})
