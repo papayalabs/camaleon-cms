@@ -25,6 +25,12 @@ http://camaleon.tuzitio.com/store/plugins
 
 ![](screenshot.png)
 
+## Updates for PapayaLabs
+* Use a background image in Login Admin Page
+* Set db_prefix to null. 
+* Use cloudfront variable in Admin for AWS S3 Endopoint
+* Use UUID(String) instead AUTO(Integer) in all models
+
 ## With Camaleon you can do:
 * Integrate into existing Rails projects
 * Multiples sites in the same installation
@@ -189,6 +195,23 @@ http://camaleon.tuzitio.com/store/plugins
   heroku rails generate camaleon_cms:install
   heroku rake camaleon_cms:generate_migrations
   heroku rake db:migrate
+  ```
+## Backup and restore data from Heroku Postgresql
+* heroku pg:backups:capture --app app_name
+* heroku pg:backups:download
+* restore to local database
+
+  ```pg_restore --verbose --clean --no-acl --no-owner -p port -h localhost -U username -d database latest.dump
+  ```
+* enter in postgresql locally
+
+  ```psql -U username -p port
+  ````
+* inside postgresql console fix schema_migrations
+
+  ```\c database
+      delete from schema_migrations;
+      insert into schema_migrations (version) values ('20211205134400'),('20211205134401'),('20211205134402'),('20211205134403'),('20211205134404'),('20211205134405'),('20211205134406'),('20211205134407'),('20211205134408'),('20211205134409'),('20211205134410'),('20211205134411'),('20211205134412');
   ```
 
 ## Sample App / Demonstration
