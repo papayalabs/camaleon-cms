@@ -197,8 +197,17 @@ http://camaleon.tuzitio.com/store/plugins
   heroku rake db:migrate
   ```
 ## Backup and restore data from Heroku Postgresql
-* heroku pg:backups:capture --app app_name
-* heroku pg:backups:download
+* Make a backup
+
+  ```bash
+    heroku pg:backups:capture --app app_name
+  ```
+* Download the backup
+
+  ```bash
+    heroku pg:backups:download
+  ```
+  
 * restore to local database
 
   ```bash
