@@ -45,7 +45,7 @@
                                 visible = true
                                 visible = pt.manage_categories? if value[:key] == 'manage_categories'
                                 visible = pt.manage_tags? if value[:key] == 'manage_tags'
-                                values = rol_values_post_type[value[:key].to_sym].to_i rescue 0
+                                values = rol_values_post_type[value[:key].to_sym].to_s rescue 0
                                 values = [] if values == 0
                                 %>
                                 <% if visible %>

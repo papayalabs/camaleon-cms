@@ -25,44 +25,44 @@ module CamaleonCms
         ids_delete_publish = @roles_post_type[:delete_publish] || []
 
         can :posts, CamaleonCms::PostType do |pt|
-          (ids_edit + ids_edit_other + ids_edit_publish).to_i.include?(pt.id) rescue false
+          (ids_edit + ids_edit_other + ids_edit_publish).to_s.include?(pt.id) rescue false
         end
 
         can :create_post, CamaleonCms::PostType do |pt|
-          ids_edit.to_i.include?(pt.id) rescue false
+          ids_edit.to_s.include?(pt.id) rescue false
         end
         can :publish_post, CamaleonCms::PostType do |pt|
-          ids_publish.to_i.include?(pt.id) rescue false
+          ids_publish.to_s.include?(pt.id) rescue false
         end
         can :edit_other, CamaleonCms::PostType do |pt|
-          ids_edit_other.to_i.include?(pt.id) rescue false
+          ids_edit_other.to_s.include?(pt.id) rescue false
         end
         can :edit_publish, CamaleonCms::PostType do |pt|
-          ids_edit_publish.to_i.include?(pt.id) rescue false
+          ids_edit_publish.to_s.include?(pt.id) rescue false
         end
 
         can :categories, CamaleonCms::PostType do |pt|
-          @roles_post_type[:manage_categories].to_i.include?(pt.id) rescue false
+          @roles_post_type[:manage_categories].to_s.include?(pt.id) rescue false
         end
         can :post_tags, CamaleonCms::PostType do |pt|
-          @roles_post_type[:manage_tags].to_i.include?(pt.id) rescue false
+          @roles_post_type[:manage_tags].to_s.include?(pt.id) rescue false
         end
 
         can :update, CamaleonCms::Post do |post|
           pt_id = post.post_type.id
           r = false
-          r ||= ids_edit.to_i.include?(pt_id) && post.user_id == user.id rescue false
-          r ||= ids_edit_publish.to_i.include?(pt_id) && post.published? rescue false
-          r ||= ids_edit_other.to_i.include?(pt_id) && post.user_id != user.id rescue false
+          r ||= ids_edit.to_s.include?(pt_id) && post.user_id == user.id rescue false
+          r ||= ids_edit_publish.to_s.include?(pt_id) && post.published? rescue false
+          r ||= ids_edit_other.to_s.include?(pt_id) && post.user_id != user.id rescue false
           r
         end
 
         can :destroy, CamaleonCms::Post do |post|
           pt_id = post.post_type.id
           r = false
-          r ||= ids_delete.to_i.include?(pt_id) && post.user_id == user.id rescue false
-          r ||= ids_delete_publish.to_i.include?(pt_id) && post.published? rescue false
-          r ||= ids_delete_other.to_i.include?(pt_id) && post.user_id != user.id rescue false
+          r ||= ids_delete.to_s.include?(pt_id) && post.user_id == user.id rescue false
+          r ||= ids_delete_publish.to_s.include?(pt_id) && post.published? rescue false
+          r ||= ids_delete_other.to_s.include?(pt_id) && post.user_id != user.id rescue false
           r
         end
 
