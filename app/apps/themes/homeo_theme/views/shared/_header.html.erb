@@ -1,0 +1,64 @@
+   	<!-- Header -->
+   	<header id="header" class="header">
+	   	<div class="top-wrap">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+		        <div id="logo" class="logo">
+							<a href="./" rel="home" title="home">
+								<%= image_tag(theme_asset_url("images/homeoagora-logo.png"), :alt => "homeoagora") %>
+							</a>
+		        </div>
+						<div class="follow-us">
+							<div class="follow-title">
+								<%= t(:follow_us) %>
+							</div>
+							<ul class="social-links">
+								<li class="facebook"><a href="#">Facebook</a></li>
+								<li class="twitter"><a href="#">Twitter</a></li>
+								<li class="google"><a href="#">Google</a></li>
+								<li class="linkedin"><a href="#">Linkedin</a></li>
+								<li class="pinterest"><a href="#">Pinterest</a></li>
+							</ul>
+						</div>
+						<div class="follow-us">
+							<div class="follow-title">
+	   							Languaes
+							</div>
+							<ul class="social-links">
+								<li>ES</li>
+								<li>EN</li>
+							</ul>
+						</div>
+		      </div><!-- /.col-md-6 -->
+		      <div class="col-md-6">
+		        <div class="btn-menu"></div><!-- //mobile menu button -->
+		          <div class="member-area">
+							<% if false %>
+							  <div class="member">
+		            	<div class="welcome">
+										<%= t(:welcome) %> <span class="name"><%= current_user.name %></span>
+										<div class="member-options">
+											<div class="avatar">
+												<div class="thumb">
+													<%= image_tag current_user.avatar.url(:small), class: "img-circle"	%>
+												</div>
+												<span class="fullname"><%= current_user.name %></span>
+											</div>
+											<ul class="options">
+                        <%= render 'shared/user_modal_navigation' %>
+											</ul>
+											<li><%= link_to t(:sign_out) , destroy_user_session_path, :class => "button" %></li>
+			            	</div>
+		            	</div>
+								</div>						  
+							<% else %>
+  		            		<span class="login-popup"><%= link_to t(:login), 'new_user_session_path', :class => "button" %></span>
+  		            		<span class="signup-popup"><%= link_to t(:become_member), 'new_user_registration_path', :class => "button" %></span>
+							<% end %>
+		        </div>
+		      </div><!-- /.col-md-6 -->
+	      </div><!-- /.row -->
+	    </div><!-- /.container -->
+	  </div><!-- /.top-wrap -->
+	</header>

@@ -1,0 +1,65 @@
+	<!-- Footer -->
+	<footer id="footer">
+		<div class="footer-widgets">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-4" data-animation="fadeInUp" data-animation-delay="0" data-animation-offset="75%">
+						<div class="widget widget-brand">
+							<div class="logo logo-footer">
+								<%= image_tag(theme_asset_url("images/homeoagora-logo.png"), :alt => "homeoagora") %>
+							</div>
+							<p>Meeting of Equals. Make Homeopathy great again!</p>
+						</div><!-- /.widget-brand -->
+						<div class="widget widget-social">
+							<h5 class="widget-title">Follow Us</h5>
+							<div class="social-list">
+								<a href="#"><%= image_tag(theme_asset_url("images/facebook.svg"), :alt => "facebook") %></a>
+								<a href="#"><%= image_tag(theme_asset_url("images/twitter.svg"), :alt => "twitter") %></a>
+								<a href="#"><%= image_tag(theme_asset_url("images/youtube.svg"), :alt => "youtube") %></a>
+								<a href="#"><%= image_tag(theme_asset_url("images/dribbble.svg"), :alt => "dribbble") %></a>
+							</div>
+							<a class="email" href="#">info@homeoagora.com</a>
+						</div><!-- /.widget-social -->
+					</div><!-- /.col-md-4 -->
+					<div class="col-md-4" data-animation="fadeInUp" data-animation-delay="0.2s" data-animation-offset="75%">
+						<div class="widget widget-twitter">
+							<h5 class="widget-title">Twitter</h5>
+							<div class="latest-tweets" data-number="3" data-username="envato" data-modpath="./twitter/index.php"></div>
+						</div><!-- /.widget-twitter -->
+					</div><!-- /.col-md-4 -->
+					<div class="col-md-2" data-animation="fadeInUp" data-animation-delay="0.4s" data-animation-offset="75%">
+						<div class="widget widget-list">
+							<h5 class="widget-title">Main</h5>
+							<ul class="links-list">
+							<% current_site.the_categories.decorate.each do |category| %>
+								  <li><a href="#"><%= category[:label] %></a></li>
+                			  <% end %>
+							</ul>
+						</div><!-- /.widget-list -->
+					</div><!-- /.col-md-2 -->
+					<div class="col-md-2" data-animation="fadeInUp" data-animation-delay="0.6s" data-animation-offset="75%">
+						<div class="widget widget-list">
+							<h5 class="widget-title">About Us</h5>
+							<ul class="links-list">
+								<li><a href="#">About Us</a></li>
+								<li><a href="#">Our Team</a></li>
+								<li><a href="#">Careers </a></li>
+								<li><a href="#">Advertise</a></li>
+								<li><a href="#">Copyright</a></li>
+							</ul>
+						</div><!-- /.widget-list -->
+					</div><!-- /.col-md-2 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</div><!-- /.footer-widgets -->
+		<div class="footer-copyright">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						&copy; 2018 Homeoagora.
+					</div><!-- /.col-md-12 -->
+				</div><!-- /.row -->
+			</div><!-- /.container -->
+		</div>
+	</footer>
+
