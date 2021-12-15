@@ -128,6 +128,9 @@ http://camaleon.tuzitio.com/store/plugins
   ```ruby
   gem "camaleon_cms", github: 'papayalabs/camaleon-cms' # latest development version
   gem 'draper', '~> 3' # for Rails 5+
+  gem 'jquery-rails' 
+  gem 'jquery-ui-rails'
+  gem "select2-rails"
   # gem 'draper', '~> 4.0.2' # ruby 3.x
 
   # For Ruby version < 2.5
