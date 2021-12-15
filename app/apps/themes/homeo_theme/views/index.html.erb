@@ -10,7 +10,26 @@
 			<div class="col-md-8">
 				<div class="featured-posts gn-animation" data-animation="fadeInUp" data-animation-delay="0" data-animation-offset="75%">
 					<div class="content-left">
-						<article class="post">
+						<% if @posts.count > 0 %>
+							<% post = @posts.first %>
+							<article class="post">
+								<div class="thumb">
+									<a href="#"><img src=<%= post.the_thumb_url(theme_asset_url('images/thumbs/9.jpg')) %> alt="img"></a>
+								</div>
+								<div class="cat">
+									<a href="">Mustreads</a>
+								</div>
+								<h3><a href="<%= post.the_url %>"><%= post.the_title %></a></h3>
+								<p class="excerpt-entry"><%= post.the_excerpt %>.</p>
+								<div class="post-meta">
+									<span class="author">By <a href="#"><%= post.the_author.fullname %></a></span>
+									<div class="activity">
+										<span class="views">345</span><span class="comment"><a href="#"><%= post.the_comments.count %></a></span>
+									</div>
+								</div>
+							</article><!--  /.post -->
+						<% else %>
+							<article class="post">
 							<div class="thumb">
 								<a href="#"><img src=<%= theme_asset_url("images/thumbs/9.jpg") %> alt="img"></a>
 							</div>
@@ -25,7 +44,8 @@
 									<span class="views">345</span><span class="comment"><a href="#">15</a></span>
 								</div>
 							</div>
-						</article><!--  /.post -->
+						<% end %>
+					</article><!--  /.post -->
 					</div><!-- /.content-left -->
 					<div class="content-right">
 						<article class="post">
