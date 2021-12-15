@@ -40,6 +40,7 @@ module Themes::TurtleTheme::MainHelper
       group.add_manual_field({"name"=>"Recents", "slug"=>"common_word_recents"},{field_key: "text_box", translate: true})
       group.add_manual_field({"name"=>"Home", "slug"=>"common_word_home"},{field_key: "text_box", translate: true})              
       group.add_manual_field({"name"=>"Details", "slug"=>"common_word_details"},{field_key: "text_box", translate: true})
+      group.add_manual_field({"name"=>"Projects", "slug"=>"common_word_projects"},{field_key: "text_box", translate: true})
     end  
     unless theme.get_field_groups.where(slug: "social_networks").any?
       group = theme.add_field_group({name: "Social Networks", is_repeat: true, slug: "social_networks", description: ""})

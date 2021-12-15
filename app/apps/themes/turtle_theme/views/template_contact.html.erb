@@ -9,7 +9,7 @@
                         <h2><%= @post.the_title %></h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item"><a href="/"><%= current_theme.the_field('common_word_home', 'Home') %></a></li>
                                 <li class="breadcrumb-item"><a href="#"><%= @post.the_title %></a></li> 
                             </ol>
                         </nav>
