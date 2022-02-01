@@ -57,7 +57,7 @@
             </div>
         </div>
 
-            <% current_site.the_posts('post').decorate.each_slice(2).to_a.each do |posts| %>
+            <% current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').order(value: :desc)).limit(6).decorate.each_slice(2).to_a.each do |posts| %>
                 <div class="row">
                     <% posts.each_with_index do |post, index| %>
                         <div class="col-xl-6 col-lg-6 col-md-6">

@@ -1,4 +1,4 @@
-<% @posts.decorate.each do |post| %>
+<% @posts.joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').order(value: :desc)).decorate.each do |post| %>
     <article class="blog_item">
         <div class="blog_item_img">
             <img class="card-img rounded-0" src="<%= post.the_thumb_url(theme_asset_url('img/blog/single_blog_1.png')) %>" alt="">
@@ -23,22 +23,12 @@
     </article>
 <% end %>
 <nav class="blog-pagination justify-content-center d-flex">
-    <ul class="pagination">
-        <li class="page-item">
-            <a href="#" class="page-link" aria-label="Previous">
-                <i class="ti-angle-left"></i>
-            </a>
-        </li>
-        <li class="page-item">
-            <a href="#" class="page-link">1</a>
-        </li>
-        <li class="page-item active">
-            <a href="#" class="page-link">2</a>
-        </li>
-        <li class="page-item">
-            <a href="#" class="page-link" aria-label="Next">
-                <i class="ti-angle-right"></i>
-            </a>
-        </li>
-    </ul>
+    <div class='row pagination_panel cama_ajax_request'>
+        <div class='col-md-10'>
+            <%= will_paginate(@posts, renderer: BootstrapPagination::Rails) %>
+        </div>
+        <div class='col-md-2 text-right total-items'>
+        <strong><%= I18n.t('camaleon_cms.admin.table.total', default: 'Total') %> <%= @posts.total_entries rescue @posts.count %></strong>
+        </div>
+    </div>
 </nav>
