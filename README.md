@@ -221,7 +221,7 @@ http://camaleon.tuzitio.com/store/plugins
   ```bash
     psql -U username -p port
   ````
-* inside postgresql console fix schema_migrations
+* inside postgresql console fix schema_migrations ( replace with the values of the migration of your local installation )
 
   ```bash
       \c database
