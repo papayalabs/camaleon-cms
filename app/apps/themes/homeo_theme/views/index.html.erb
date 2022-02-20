@@ -10,7 +10,8 @@
 			<div class="col-md-8">
 				<div class="featured-posts gn-animation" data-animation="fadeInUp" data-animation-delay="0" data-animation-offset="75%">
 					<% i = 0 %>
-					<% current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').order(value: :desc)).limit(3).decorate.each do |post| %>
+					<% current_site.the_posts('post').includes(:custom_field_values).merge(CamaleonCms::CustomFieldsRelationship.where(custom_field_slug: 'home_sections', value: 'mustread')).limit(3).decorate.each do |post| %>
+					<!-- % current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').order(value: :desc)).limit(3).decorate.each do |post| % -->
 						<% if i == 0 %>
 							<div class="content-left">
 						<% else %>

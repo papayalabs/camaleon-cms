@@ -9,6 +9,21 @@ module Themes::HomeoTheme::MainHelper
 
   # callback called after theme installed
   def homeo_theme_on_install_theme(theme)
+    unless current_site.the_post_types.first.get_field_groups.where(slug: "section").any?
+      group = current_site.the_post_types.first.add_field_group({name: "Sections", slug: "section"}, 'Post')
+      group.add_field({"name"=>"Sections", "slug"=>"home_sections"},{field_key: "select", multiple_options: [
+        {title: "Normal", value: "normal", default: true},
+        {title: "Mustread", value: "mustread"},
+        {title: "Highlight", value: "highlight"},
+        {title: "Popular", value: "popular"},
+        {title: "Editor Pick", value: "editor_pick"},
+      ]})
+    end
+    unless current_site.the_post_types.first.get_field_groups.where(slug: "_group-post-date").any?
+      group = current_site.the_post_types.first.add_field_group({name: "Post Date", slug: "_group-post-date"}, 'Post')
+      group.add_field({"name"=>"Post Date", "slug"=>"post-date"},{field_key: "date", required: true})
+    end
+     
     # # Sample Custom Field
     # unless theme.get_field_groups.where(slug: "fields").any?
     #   group = theme.add_field_group({name: "Main Settings", slug: "fields", description: ""})
