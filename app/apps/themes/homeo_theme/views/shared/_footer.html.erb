@@ -29,11 +29,11 @@
 					</div><!-- /.col-md-4 -->
 					<div class="col-md-2" data-animation="fadeInUp" data-animation-delay="0.4s" data-animation-offset="75%">
 						<div class="widget widget-list">
-							<h5 class="widget-title">Main</h5>
+							<h5 class="widget-title"><%= current_theme.the_field('common_word_categories', 'Categories') %></h5>
 							<ul class="links-list">
-							<% current_site.the_categories.decorate.each do |category| %>
-								  <li><a href="#"><%= category[:label] %></a></li>
-                			  <% end %>
+								<% current_site.the_categories.decorate.each do |item| %>
+									<li><a href="<%= item.the_url %>"><%= item.the_title %></a></li>
+								<% end %>
 							</ul>
 						</div><!-- /.widget-list -->
 					</div><!-- /.col-md-2 -->

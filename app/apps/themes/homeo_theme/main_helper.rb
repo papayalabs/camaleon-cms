@@ -50,6 +50,7 @@ module Themes::HomeoTheme::MainHelper
  end  
  unless theme.get_field_groups.where(slug: "social_networks").any?
    group = theme.add_field_group({name: "Social Networks", is_repeat: true, slug: "social_networks", description: ""})
+   group.add_field({"name"=>"Name", "slug"=>"social_network_name"},{field_key: "text_box"})
    group.add_field({"name"=>"Class", "slug"=>"social_network_class"},{field_key: "text_box"})
    group.add_field({"name"=>"URL", "slug"=>"social_network_url"},{field_key: "url"})
  end

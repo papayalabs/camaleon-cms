@@ -344,24 +344,26 @@
 					<div class="flex-container">
 						<div class="flexslider loading">
 							<ul class="slides">
+							<% current_theme.the_fields_grouped(['home_slider_title', 'home_slider_description','home_slider_display_button','home_slider_button_description','home_slider_bg_image','home_slider_button_url']).each do |group| %>
 								<li>
 									<div class="item-wrap">
-										<img src="<%= theme_asset_url("images/slider/1.jpg") %>" alt="image">
-										<p class="item" data-bottomtext="0">Kenneth Cole Challenges You to Do Good Deeds — and Prove it via Google Glass</p>
+										<img src=<%= group['home_slider_bg_image'][0] %> alt="image">
+										<p class="item" data-bottomtext="0"><%= group['home_slider_description'][0] %></p>
 									</div>
 								</li>
 								<li>
 									<div class="item-wrap">
-										<img src="<%= theme_asset_url("images/slider/2.jpg") %>" alt="image">
-										<p class="item" data-bottomtext="0">Kenneth Cole Challenges You to Do Good Deeds — and Prove it via Google Glass</p>
+										<img src=<%= group['home_slider_bg_image'][0] %> alt="image">
+										<p class="item" data-bottomtext="0"><%= group['home_slider_description'][0] %></p>
 									</div>
 								</li>
 								<li>
 									<div class="item-wrap">
-										<img src="<%= theme_asset_url("images/slider/3.jpg") %>" alt="image">
-										<p class="item" data-bottomtext="0">Kenneth Cole Challenges You to Do Good Deeds — and Prove it via Google Glass</p>
+										<img src=<%= group['home_slider_bg_image'][0] %> alt="image">
+										<p class="item" data-bottomtext="0"><%= group['home_slider_description'][0] %></p>
 									</div>
 								</li>
+							<% end %>
 							</ul>
 						</div>
 					</div>
@@ -371,164 +373,53 @@
 				<div class="trending-posts">
 					<div class="gn-line"></div>
 					<div class="section-title">
-						<h4><a href="#">Trending</a></h4>
+						<h4><a href="#"><%= section_names[3] %></a></h4>
 					</div>
-					<div class="one-fourth gn-animation" data-animation="fadeInUp" data-animation-delay="0" data-animation-offset="75%">
-						<article class="post first">
-							<div class="thumb">
-								<a href="#"><img src="<%= theme_asset_url("images/thumbs/5.jpg") %>" alt="img"></a>
-							</div>
-							<span class="date">October 6, 2013</span>
-							<h3><a href="#">This pays especially well in technology, where you earn a premium for working fast.</a></h3>
-						</article><!--  /.post -->
-						<article class="post">
-							<span class="date">October 6, 2013</span>
-							<h3><a href="#">Here is a brief sketch of the economic proposition.</a></h3>
-						</article><!--  /.post -->
-						<article class="post">
-							<span class="date">October 6, 2013</span>
-							<h3><a href="#">Startups are not magic.</a></h3>
-						</article><!--  /.post -->
-						<article class="post">
-							<span class="date">October 6, 2013</span>
-							<h3><a href="#">Like all back-of-the-envelope calculations, this one has a lot of wiggle room.</a></h3>
-						</article><!--  /.post -->
-						<article class="post">
-							<span class="date">October 6, 2013</span>
-							<h3><a href="#">Imagine the stress of working for the Post Office for fifty years.</a></h3>
-						</article><!--  /.post -->
-					</div>
-					<div class="one-fourth gn-animation" data-animation="fadeInUp" data-animation-delay="0.2s" data-animation-offset="75%">
-						<article class="post first">
-							<div class="thumb">
-								<a href="#"><img src="<%= theme_asset_url("images/thumbs/5.jpg") %>" alt="img"></a>
-							</div>
-							<span class="date">October 6, 2013</span>
-							<h3><a href="#">Lots of people get rich knowing nothing more than that.</a></h3>
-						</article><!--  /.post -->
-						<article class="post">
-							<span class="date">October 6, 2013</span>
-							<h3><a href="#">If you're a good hacker in your mid twenties, you can get a job paying about $80,000 per year.</a></h3>
-						</article><!--  /.post -->
-						<article class="post">
-							<span class="date">October 6, 2013</span>
-							<h3><a href="#">They don't change the laws of wealth creation.</a></h3>
-						</article><!--  /.post -->
-						<article class="post">
-							<span class="date">October 6, 2013</span>
-							<h3><a href="#">I wouldn't try to defend the actual numbers. But I stand by the structure of the calculation.</a></h3>
-						</article><!--  /.post -->
-					</div>
-					<div class="one-fourth gn-animation" data-animation="fadeInUp" data-animation-delay="0.4s" data-animation-offset="75%">
-						<article class="post first">
-							<div class="thumb">
-								<a href="#"><img src="<%= theme_asset_url("images/thumbs/5.jpg") %>" alt="img"></a>
-							</div>
-							<span class="date">October 6, 2013</span>
-							<h3><a href="#">I think your best bet would be to start or join a startup.</a></h3>
-						</article><!--  /.post -->
-						<article class="post">
-							<span class="date">October 6, 2013</span>
-							<h3><a href="#">You could probably work twice as many hours as a corporate employee.</a></h3>
-						</article><!--  /.post -->
-						<article class="post">
-							<span class="date">October 6, 2013</span>
-							<h3><a href="#">Imagine the stress of working for the Post Office for fifty years. In a startup you compress all this stress into three or four years.</a></h3>
-						</article><!--  /.post -->
-						<article class="post">
-							<span class="date">October 6, 2013</span>
-							<h3><a href="#">This pays especially well in technology, where you earn a premium for working fast.</a></h3>
-						</article><!--  /.post -->
-					</div>
-					<div class="one-fourth last gn-animation" data-animation="fadeInUp" data-animation-delay="0.6s" data-animation-offset="75%">
-						<article class="post first">
-							<div class="thumb">
-								<a href="#"><img src="<%= theme_asset_url("images/thumbs/5.jpg") %>" alt="img"></a>
-							</div>
-							<span class="date">October 6, 2013</span>
-							<h3><a href="#">That's been a reliable way to get rich for hundreds of years.</a></h3>
-						</article><!--  /.post -->
-						<article class="post">
-							<span class="date">October 6, 2013</span>
-							<h3><a href="#">Like all back-of-the-envelope calculations, this one has a lot of wiggle room.</a></h3>
-						</article><!--  /.post -->
-						<article class="post">
-							<span class="date">October 6, 2013</span>
-							<h3><a href="#">Three million? How do I get to be a billionaire, like Bill Gates?</a></h3>
-						</article><!--  /.post -->
-						<article class="post">
-							<span class="date">October 6, 2013</span>
-							<h3><a href="#">If $3 million a year seems high to some people, it will seem low to others.</a></h3>
-						</article><!--  /.post -->
-					</div>
+					<% i = 0 %>
+					<% tag = section_tags[3] %>
+					<% current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').joins('LEFT JOIN "term_relationships" as "tag_rel" ON "posts"."id" = tag_rel."objectid" LEFT JOIN "term_taxonomy" as "tags" on tags.id = tag_rel.term_taxonomy_id').where(tags:{slug: tag}).order(value: :desc)).limit(4).decorate.each do |post| %>
+						<div class="one-fourth gn-animation" data-animation="fadeInUp" data-animation-delay="0" data-animation-offset="75%">
+							<article class="post first">
+								<div class="thumb">
+									<a href="<%= post.the_url %>"><img src=<%= post.the_thumb_url(theme_asset_url('images/thumbs/5.jpg')) %> alt="img"></a>
+								</div>	
+								<%= post.the_field('date', '') %>
+								<% months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"] %>
+								<% day = DateTime.parse(post.the_field('post-date', '').to_s+" 12:00AM").day %>
+								<% month = months[DateTime.parse(post.the_field('post-date', '').to_s+" 12:00AM").month.to_i - 1] %>
+								<% year = DateTime.parse(post.the_field('post-date', '').to_s+" 12:00AM").year %>
+								<span class="date"><%= month+" "+day.to_s+", "+year.to_s %></span>
+								<h3><a href="<%= post.the_url %>"><%= post.the_title %></a></h3>
+							</article><!--  /.post -->
+						</div>
+					<% end %>
 				</div><!-- /.trending-posts -->
 				<div class="gn-line"></div>
 			</div><!-- /.col-md-12 -->
 			<div class="col-md-8">
 				<div class="social-media-posts gn-animation" data-animation="fadeInUp" data-animation-delay="0" data-animation-offset="75%">
 					<div class="section-title">
-						<h4><a href="#">Social Media</a></h4>
+						<h4><a href="#"><%= section_names[3] %></a></h4>
 					</div>
-					<article class="post">
-						<div class="thumb">
-							<a href="#"><img src="<%= theme_asset_url("images/thumbs/6.jpg") %>" alt="img"></a>
-						</div>
-						<div class="content">
-							<div class="cat">
-								<a href="#">Mustreads</a>
+					<% i = 0 %>
+					<% tag = section_tags[3] %>
+					<% current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').joins('LEFT JOIN "term_relationships" as "tag_rel" ON "posts"."id" = tag_rel."objectid" LEFT JOIN "term_taxonomy" as "tags" on tags.id = tag_rel.term_taxonomy_id').where(tags:{slug: tag}).order(value: :desc)).limit(4).decorate.each do |post| %>
+						<article class="post">
+							<div class="thumb">
+							<a href="<%= post.the_url %>"><img src=<%= post.the_thumb_url(theme_asset_url('images/thumbs/6.jpg')) %> alt="img"></a>
 							</div>
-							<h3><a href="#">If you wanted to get rich.</a></h3>
-							<p class="excerpt-entry">I think your best bet would be to start or join a startup. That's been a reliable way to get rich for hundreds of years.</p>
-							<div class="activity">
-								<span class="views">345</span><span class="comment"><a href="#">15</a></span>
+							<div class="content">
+								<div class="cat">
+									<a href="#"><%= section_names[3] %></a>
+								</div>
+								<h3><a href="<%= post.the_url %>"><%= post.the_title %></a></h3>
+								<p class="excerpt-entry"><%= post.the_excerpt %>.</p>
+								<div class="activity">
+									<span class="views">345</span><span class="comment"><a href="#">15</a></span>
+								</div>
 							</div>
-						</div>
-					</article><!--  /.post -->
-					<article class="post">
-						<div class="thumb">
-							<a href="#"><img src="images/thumbs/6.jpg" alt="img"></a>
-						</div>
-						<div class="content">
-							<div class="cat">
-								<a href="#">Mustreads</a>
-							</div>
-							<h3><a href="#">Startups are not magic.</a></h3>
-							<p class="excerpt-entry">That's been a reliable way to get rich for hundreds of years.The word "startup" dates from the 1960s, but what happens in one is very similar.</p>
-							<div class="activity">
-								<span class="views">345</span><span class="comment"><a href="#">15</a></span>
-							</div>
-						</div>
-					</article><!--  /.post -->
-					<article class="post">
-						<div class="thumb">
-							<a href="#"><img src="images/thumbs/6.jpg" alt="img"></a>
-						</div>
-						<div class="content">
-							<div class="cat">
-								<a href="#">Mustreads</a>
-							</div>
-							<h3><a href="#">They don't change the laws of wealth creation.</a></h3>
-							<p class="excerpt-entry">That's been a reliable way to get rich for hundreds of years.The word "startup" dates from the 1960s.</p>
-							<div class="activity">
-								<span class="views">345</span><span class="comment"><a href="#">15</a></span>
-							</div>
-						</div>
-					</article><!--  /.post -->
-					<article class="post">
-						<div class="thumb">
-							<a href="#"><img src="images/thumbs/6.jpg" alt="img"></a>
-						</div>
-						<div class="content">
-							<div class="cat">
-								<a href="#">Mustreads</a>
-							</div>
-							<h3><a href="#">They just represent a point at the far end of the curve.</a></h3>
-							<p class="excerpt-entry">That's been a reliable way to get rich for hundreds of years.The word "startup" dates from the 1960s.</p>
-							<div class="activity">
-								<span class="views">345</span><span class="comment"><a href="#">15</a></span>
-							</div>
-						</div>
-					</article><!--  /.post -->
+						</article><!--  /.post -->
+					<% end %>
 				</div><!-- /.social-media-posts -->
 			</div><!-- /.col-md-8 -->
 		</div><!-- /.row -->

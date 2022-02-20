@@ -6,14 +6,19 @@
 			<div class="col-md-9">
 				<nav id="mainnav" class="mainnav">
 					<ul class="menu">
-						<li><a href="#">About us</a></li>
-						<li class="has-children"><a class="active" href="index.html"><%= current_theme.the_field('common_word_categories', 'Categories') %></a>
-							<ul class="sub-menu">
-								<% current_site.the_categories.decorate.each do |item| %>
-									<li><a href="<%= item.the_url %>"><%= item.the_title %></a></li>
-								<% end %>
-							</ul>
-						</li>
+						<% cama_menu_parse_items(current_site.nav_menus.find_by_slug('main_menu').children).each do |item| %>
+							<% if current_site.nav_menus.find_by_slug(item[:url].split('/').last) != nil %>
+								<li class="has-children"><a class="active" href="index.html"><%= item[:label] %></a>
+									<ul class="sub-menu">
+									<% cama_menu_parse_items(current_site.nav_menus.find_by_slug(item[:url].split('/').last).children).each do |item| %>
+											<li><a href="<%= item[:url] %>"><%= item[:label] %></a></li>
+										<% end %>
+									</ul>
+								</li>
+							<% else %>
+								<li><a href="<%= item[:url] %>"><%= item[:label] %></a></li>
+							<% end %>
+						<% end %> 
 					</ul><!-- /.menu -->
 				</nav><!-- /nav -->
 			</div><!-- /.col-md-9 -->
