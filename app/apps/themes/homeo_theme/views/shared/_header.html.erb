@@ -14,11 +14,9 @@
 								<%= t(:follow_us) %>
 							</div>
 							<ul class="social-links">
-								<li class="facebook"><a href="#">Facebook</a></li>
-								<li class="twitter"><a href="#">Twitter</a></li>
-								<li class="google"><a href="#">Google</a></li>
-								<li class="linkedin"><a href="#">Linkedin</a></li>
-								<li class="pinterest"><a href="#">Pinterest</a></li>
+								<% current_theme.the_fields_grouped(['social_network_class', 'social_network_url']).each do |group| %>
+									<li class="<%= group['social_network_class'][0] %>"><a href="<%= group['social_network_url'][0] %>"><%= group['social_network_class'][0].capitalize %></a></li>
+								<% end %>
 							</ul>
 						</div>
 						<div class="follow-us">
@@ -26,8 +24,7 @@
 	   							Languaes
 							</div>
 							<ul class="social-links">
-								<li>ES</li>
-								<li>EN</li>
+								<li><%= raw current_site.draw_languages("language list-inline pull-right", true) %></li>
 							</ul>
 						</div>
 		      </div><!-- /.col-md-6 -->

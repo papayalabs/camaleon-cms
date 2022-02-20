@@ -36,7 +36,7 @@
                   </div>
                   <div class="tags">
                     <% @post.the_tags.each do |tag| %>
-                      <a href="#"><%= tag.capitalize %></a>
+                      <a href="#"><%= tag.name.capitalize %></a>
                     <% end %>
                   </div>
                 </div><!-- /.help-post -->

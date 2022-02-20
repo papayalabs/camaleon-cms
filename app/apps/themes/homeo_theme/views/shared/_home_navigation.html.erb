@@ -7,21 +7,12 @@
 				<nav id="mainnav" class="mainnav">
 					<ul class="menu">
 						<li><a href="#">About us</a></li>
-						<li><a href="#">Homeopaths</a></li>
-						<li class="has-children"><a class="active" href="index.html">Categories</a>
+						<li class="has-children"><a class="active" href="index.html"><%= current_theme.the_field('common_word_categories', 'Categories') %></a>
 							<ul class="sub-menu">
-								<li><a href="#">Category 1</a></li>
-								<li><a href="#">Category 2</a></li>
-								<li class="has-children"><a href="#">Category 3</a>
-									<ul class="sub-menu">
-										<li><a href="#">Sub Category</a></li>
-										<li><a href="#">Sub Category</a></li>
-										<li><a href="#">Sub Category</a></li>
-										<li><a href="#">Sub Category</a></li>
-										<li><a href="#">Sub Category</a></li>
-									</ul><!-- /.submenu -->
-								</li>
-							</ul><!-- /.submenu -->
+								<% current_site.the_categories.decorate.each do |item| %>
+									<li><a href="<%= item.the_url %>"><%= item.the_title %></a></li>
+								<% end %>
+							</ul>
 						</li>
 					</ul><!-- /.menu -->
 				</nav><!-- /nav -->
