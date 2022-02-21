@@ -2,25 +2,36 @@
   <title>Homeoagora</title>
 <% end %>
 
-	<!-- Main -->
-	<% @posts = current_site.the_posts('post').decorate %>
-	<section id="main">
-	<% section_names = [] %>
-	<% section_tags = [] %>
-	<% current_theme.the_fields_grouped(['section_name', 'section_tag_slug','section_position']).each do |group| %>
-		<% section_names[group['section_position'][0].to_i] = group['section_name'][0] %>
-		<% section_tags[group['section_position'][0].to_i] = group['section_tag_slug'][0] %>
-	<% end %>	
+<!-- Main -->
+
+<section id="main">
+
+
+<!-- Fullfil the names and tags from admin -->
+
+<% section_names = [] %>
+<% section_tags = [] %>
+<% current_theme.the_fields_grouped(['section_name', 'section_tag_slug','section_position']).each do |group| %>
+	<% section_names[group['section_position'][0].to_i] = group['section_name'][0] %>
+	<% section_tags[group['section_position'][0].to_i] = group['section_tag_slug'][0] %>
+<% end %>	
+
+<!-- Container -->
+
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8">
+
+				<!------------------------------------- Section #0 ------------------------------------->
+				<% name = section_names[0] %>
+				<% tag = section_tags[0] %>
+				<% number_of_posts = 3 %>
+
 				<div class="featured-posts gn-animation" data-animation="fadeInUp" data-animation-delay="0" data-animation-offset="75%">
-					<% i = 0 %>
 					<!-- % current_site.the_posts('post').joins('LEFT JOIN "term_relationships" as "tag_rel" ON "posts"."id" = tag_rel."objectid" LEFT JOIN "term_taxonomy" as "tags" on tags.id = tag_rel.term_taxonomy_id').where(tags:{slug: 'events'}).limit(3).decorate.each do |post| % -->
-					<!-- % current_site.the_posts('post').includes(:custom_field_values).merge(CamaleonCms::CustomFieldsRelationship.where(custom_field_slug: 'home_sections', value: 'mustread')).limit(3).decorate.each do |post| % -->
-					<% tag = section_tags[0] %>
-					<% current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').joins('LEFT JOIN "term_relationships" as "tag_rel" ON "posts"."id" = tag_rel."objectid" LEFT JOIN "term_taxonomy" as "tags" on tags.id = tag_rel.term_taxonomy_id').where(tags:{slug: tag}).order(value: :desc)).limit(3).decorate.each do |post| %>
-						<% if i == 0 %>
+					<!-- % current_site.the_posts('post').includes(:custom_field_values).merge(CamaleonCms::CustomFieldsRelationship.where(custom_field_slug: 'home_sections', value: 'mustread')).limit(3).decorate.each_with_index do |post| % -->
+					<% current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').joins('LEFT JOIN "term_relationships" as "tag_rel" ON "posts"."id" = tag_rel."objectid" LEFT JOIN "term_taxonomy" as "tags" on tags.id = tag_rel.term_taxonomy_id').where(tags:{slug: tag}).order(value: :desc)).limit(number_of_posts).decorate.each_with_index do |post,index| %>
+						<% if index == 0 %>
 							<div class="content-left">
 						<% else %>
 							<div class="content-right">
@@ -30,10 +41,10 @@
 										<a href="#"><img src=<%= post.the_thumb_url(theme_asset_url('images/thumbs/9.jpg')) %> alt="img"></a>
 									</div>
 									<div class="cat">
-										<a href=""><%= section_names[0] %></a>
+										<a href=""><%= name %></a>
 									</div>
 									<h3><a href="<%= post.the_url %>"><%= post.the_title %></a></h3>
-									<% if i == 0 %>
+									<% if index == 0 %>
 										<p class="excerpt-entry"><%= post.the_excerpt %>.</p>
 										<div class="post-meta">
 											<span class="author">By <a href="#"><%= post.the_author.fullname %></a></span>
@@ -48,16 +59,22 @@
 									<% end %>
 								</article><!--  /.post -->
 							</div>
-						<% i = i + 1 %>
 					<% end %>
 				</div><!-- /.featured-posts -->
+				<!---------------------------------- End of Section #0 --------------------------------->
+
+				
+				<!------------------------------------- Section #1 ------------------------------------->				
+				<% name = section_names[1] %>
+				<% tag = section_tags[1] %>
+				<% number_of_posts = 4 %>
+
 				<div class="highlights-posts gn-animation" data-animation="fadeInUp" data-animation-delay="0" data-animation-offset="75%">
 					<div class="gn-line"></div>
 					<div class="section-title">
-						<h4><a href="#"><%= section_names[1] %></a></h4>
+						<h4><a href="#"><%= name %></a></h4>
 					</div>
-					<% tag = section_tags[1] %>
-					<% current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').joins('LEFT JOIN "term_relationships" as "tag_rel" ON "posts"."id" = tag_rel."objectid" LEFT JOIN "term_taxonomy" as "tags" on tags.id = tag_rel.term_taxonomy_id').where(tags:{slug: tag}).order(value: :desc)).limit(4).decorate.each_slice(4).to_a.each do |posts| %>
+					<% current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').joins('LEFT JOIN "term_relationships" as "tag_rel" ON "posts"."id" = tag_rel."objectid" LEFT JOIN "term_taxonomy" as "tags" on tags.id = tag_rel.term_taxonomy_id').where(tags:{slug: tag}).order(value: :desc)).limit(4).decorate.each_slice(number_of_posts).to_a.each do |posts| %>
 						<% posts.each_with_index do |post, index| %>	
 							<% if index == 0 || index == 2 %>
 								<article class="post">
@@ -70,7 +87,7 @@
 										<a href="<%= post.the_url %>"><img src=<%= post.the_thumb_url(theme_asset_url('images/thumbs/7.jpg')) %> alt="img"></a>
 									</div>
 									<div class="cat">
-										<a href=""><%= section_names[1] %></a>
+										<a href=""><%= name %></a>
 									</div>
 									<h3><a href="<%= post.the_url %>"><%= post.the_title %></a></h3>
 									<div class="activity">
@@ -80,21 +97,27 @@
 							<% end %>
 						<% end %>
 				</div><!-- /.highlights-posts -->
+				<!---------------------------------- End of Section #1 --------------------------------->
+
+				<!------------------------------------- Section #2 ------------------------------------->				
+				<% name = section_names[2] %>
+				<% tag = section_tags[2] %>
+				<% number_of_posts = 3 %>
+
 				<div class="editors-posts gn-animation" data-animation="fadeInUp" data-animation-delay="0" data-animation-offset="75%">
 					<div class="gn-line"></div>
 					<div class="section-title">
-						<h4><a href="#"><%= section_names[2] %></a></h4>
+						<h4><a href="#"><%= name %></a></h4>
 					</div>
 					<div class="post-wrap">
-						<% tag = section_tags[2] %>
-						<% current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').joins('LEFT JOIN "term_relationships" as "tag_rel" ON "posts"."id" = tag_rel."objectid" LEFT JOIN "term_taxonomy" as "tags" on tags.id = tag_rel.term_taxonomy_id').where(tags:{slug: tag}).order(value: :desc)).limit(3).decorate.each do |post| %>
+						<% current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').joins('LEFT JOIN "term_relationships" as "tag_rel" ON "posts"."id" = tag_rel."objectid" LEFT JOIN "term_taxonomy" as "tags" on tags.id = tag_rel.term_taxonomy_id').where(tags:{slug: tag}).order(value: :desc)).limit(number_of_posts).decorate.each do |post| %>
 							<article class="post">
 								<div class="thumb">
 									<a href="#"><img src=<%= post.the_thumb_url(theme_asset_url('images/thumbs/3.jpg')) %> alt="img"></a>
 								</div>
 								<div class="content">
 									<div class="cat">
-										<a href=""><%= section_names[2] %></a>
+										<a href=""><%= name %></a>
 									</div>
 									<h3><a href="<%= post.the_url %>"><%= post.the_title %></a></h3>
 									<p class="excerpt-entry"><%= post.the_excerpt %>.</p>
@@ -107,22 +130,27 @@
 						<% end %>
 					</div><!-- /.post-wrap -->
 				</div><!-- /.editors-posts -->
+				<!---------------------------------- End of Section #2 --------------------------------->
+
+				<!------------------------------------- Section #3 ------------------------------------->				
+				<% name = section_names[3] %>
+				<% tag = section_tags[3] %>
+				<% number_of_posts = 10 %>
+
 				<div class="popular-posts gn-animation" data-animation="fadeInUp" data-animation-delay="0" data-animation-offset="75%">
 					<div class="gn-line"></div>
 					<div class="section-title">
-						<h4><a href="#"><%= section_names[3] %></a></h4>
+						<h4><a href="#"><%= name %></a></h4>
 					</div>
-					<% i = 0 %>
-					<% tag = section_tags[3] %>
-					<% current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').joins('LEFT JOIN "term_relationships" as "tag_rel" ON "posts"."id" = tag_rel."objectid" LEFT JOIN "term_taxonomy" as "tags" on tags.id = tag_rel.term_taxonomy_id').where(tags:{slug: tag}).order(value: :desc)).limit(10).decorate.each do |post| %>
-						<% if i == 0 %>
+					<% current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').joins('LEFT JOIN "term_relationships" as "tag_rel" ON "posts"."id" = tag_rel."objectid" LEFT JOIN "term_taxonomy" as "tags" on tags.id = tag_rel.term_taxonomy_id').where(tags:{slug: tag}).order(value: :desc)).limit(number_of_posts).decorate.each_with_index do |post,index| %>
+						<% if index == 0 %>
 							<div class="content-left">
 								<article class="post">
 									<div class="thumb">
 										<a href="#"><img src=<%= post.the_thumb_url(theme_asset_url('images/thumbs/8.jpg')) %> alt="img"></a>
 									</div>
 									<div class="cat">
-										<a href=""><%= section_names[3] %></a>
+										<a href=""><%= name %></a>
 									</div>
 									<h3><a href="<%= post.the_url %>"><%= post.the_title %></a></h3>
 									<p class="excerpt-entry"><%= post.the_excerpt %>.</p>
@@ -147,16 +175,18 @@
 								</article><!--  /.post -->
 							</div>
 						<% end %>
-						<% i = i + 1 %>
 					<% end %>
 				</div><!-- /.popular-posts -->
+				<!---------------------------------- End of Section #3 --------------------------------->
 			</div><!-- /.col-md-8 -->
 			<div class="col-md-4">
 				<div class="sidebar-widget-1">
+					<!----------------------------------- Recent Posts ------------------------------------->	
+					<% number_of_posts = 3 %>
 					<div class="widget widget-recent gn-animation" data-animation="fadeInUp" data-animation-delay="0" data-animation-offset="75%">
 						<h5 class="widget-title"><%= current_theme.the_field('common_word_recents', 'Recents') %></h5>
 						<ul>
-							<% current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').order(value: :desc)).limit(3).decorate.each do |post| %>
+							<% current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').order(value: :desc)).limit(number_of_posts).decorate.each do |post| %>
 								<li>
 									<div class="thumb">
 										<a href=""><img src=<%= post.the_thumb_url(theme_asset_url('images/thumbs/2.jpg')) %> alt="img"></a>
@@ -174,24 +204,34 @@
 							<% end %>
 						</ul>
 					</div><!-- /.widget-recent -->
+					<!------------------------------ End of Recent Posts --------------------------------->
+					
+					<!-------------------------------- Advertisement ------------------------------------->
 					<div class="widget widget-ads gn-animation" data-animation="fadeInUp" data-animation-delay="0" data-animation-offset="75%">
 						<a href="#"><img src="images/ad.jpg" alt="image"></a>
 						<p class="text-ad">Advertisement</p>
 					</div><!-- /.widget-ads -->
+					<!----------------------------- End of Advertisement --------------------------------->
+
+					<!------------------------------------- Section #4 ------------------------------------->				
+					<% name = section_names[4] %>
+					<% tag = section_tags[4] %>
+					<% number_of_posts = 5 %>
+
 					<div class="widget widget-most-popular gn-animation" data-animation="fadeInUp" data-animation-delay="0" data-animation-offset="75%">
 						<h5 class="widget-title">5 Most Popular</h5>
 						<ul>
-						<% i = 0 %>
-						<% tag = section_tags[3] %>
-						<% current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').joins('LEFT JOIN "term_relationships" as "tag_rel" ON "posts"."id" = tag_rel."objectid" LEFT JOIN "term_taxonomy" as "tags" on tags.id = tag_rel.term_taxonomy_id').where(tags:{slug: tag}).order(value: :desc)).limit(5).decorate.each do |post| %>
-							<li>
-								<div class="order"><%= i+1 %></div>
-								<p><a href="<%= post.the_url %>"><%= post.the_title %></a></p>
-							</li>
-							<% i = i +1 %>
-						<% end %>
+							<% current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').joins('LEFT JOIN "term_relationships" as "tag_rel" ON "posts"."id" = tag_rel."objectid" LEFT JOIN "term_taxonomy" as "tags" on tags.id = tag_rel.term_taxonomy_id').where(tags:{slug: tag}).order(value: :desc)).limit(number_of_posts).decorate.each_with_index do |post,index| %>
+								<li>
+									<div class="order"><%= index+1 %></div>
+									<p><a href="<%= post.the_url %>"><%= post.the_title %></a></p>
+								</li>
+							<% end %>
 						</ul>
 					</div><!-- /.widget-popular -->
+					<!---------------------------------- End of Section #4 --------------------------------->
+
+					<!-------------------------------- Comments ------------------------------------->				
 					<div class="widget widget-tabs gn-animation" data-animation="fadeInUp" data-animation-delay="0" data-animation-offset="75%">
 						<div class="tabs">
 							<ul class="menu-tab">
@@ -298,6 +338,9 @@
 							</div><!-- /.content-tab -->
 						</div><!-- /.tabs -->
 					</div><!-- /.widget-tabs -->
+					<!------------------------------ End of Comments --------------------------------->
+
+					<!------------------------------- Social Networks --------------------------------->
 					<div class="widget widget-follow-us gn-animation" data-animation="fadeInUp" data-animation-delay="0" data-animation-offset="75%">
 						<h5 class="widget-title text-dark">Follow Us</h5>
 						<div class="socials">
@@ -309,19 +352,37 @@
 							<a class="tumblr" href="#"><i class="fa fa-tumblr"></i></a>
 						</div>
 					</div><!-- /.widget-follow-us -->
+					<!---------------------------- End of Social Networks ------------------------------>
+
+					<!---------------------------------- Archives -------------------------------------->
 					<div class="widget widget-categories gn-animation" data-animation="fadeInUp" data-animation-delay="0" data-animation-offset="75%">
 						<h5 class="widget-title">Archives</h5>
+						<% dates = current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date')).map { |post| post.custom_field_values[0].value } %>
+						<% hash = {}
+							dates.each do |date|
+								if date.present?
+									year, month = Date.parse(date).strftime('%Y,%B').split(',')
+									hash[year] ||= {}
+									hash[year][month] = hash[year][month].to_a << date
+								end
+							end
+						%>
+
 						<ul class="cat-list">
-							<li><a href="#">December 2013 <span>(0)</span></a></li>
-							<li><a href="#">November 2013 <span>(22)</span></a></li>
-							<li><a href="#">October 2013 <span>(17)</span></a></li>
-							<li><a href="#">June 2013 <span>(16)</span></a></li>
-							<li><a href="#">May 2013 <span>(14)</span></a></li>
-							<li><a href="#">April 2013 <span>(10)</span></a></li>
-							<li><a href="#">March 2013 <span>(1)</span></a></li>
-							<li><a href="#">December 2012 <span>(1)</span></a></li>
+							<% now = DateTime.now %>
+							<% 100.times.each do %>
+								<% month = now.strftime('%B') %>
+								<% year = now.strftime('%Y') %>
+								<% if hash[year].present? && hash[year][month].present? %>
+									<li><a href="#"><%= month+" "+year %><span>(<%= hash[year][month].count %>)</span></a></li>
+								<% end %>
+								<% now = now << 1 %>
+							<% end %>
 						</ul>
 					</div><!-- /.widget-categories -->
+					<!-------------------------------- End of Archives --------------------------------->
+
+					<!---------------------------------- Newsletter ------------------------------------>
 					<div class="widget widget-subscribe gn-animation" data-animation="fadeInUp" data-animation-delay="0" data-animation-offset="75%">
 						<h5 class="widget-title">Good News Newsetter</h5>
 						<p>Subscribe to our email newsletter for good news, sent out every Monday.</p>
@@ -337,9 +398,11 @@
 							<div id="subscribe-msg"></div>
 						</form>
 					</div><!-- /.widget-subscribe -->
+					<!-------------------------------- End of Newsletter ------------------------------->
 				</div><!-- /.sidebar -->
 			</div><!-- /.col-md-4 -->
-			<div class="col-md-12">
+			<!---------------------------------- Slider ------------------------------------>
+			<div class="col-md-12">				
 				<div class="gnSlider gn-animation" data-animation="fadeInUp" data-animation-delay="0" data-animation-offset="75%">
 					<div class="flex-container">
 						<div class="flexslider loading">
@@ -367,17 +430,23 @@
 							</ul>
 						</div>
 					</div>
-				</div><!-- /.gnSlider -->
+				</div><!-- /.gnSlider -->				
 			</div><!-- /.col-md-12 -->
+			<!-------------------------------- End of Slider --------------------------------->
+
+
 			<div class="col-md-12">
+				<!------------------------------------- Section #5 ------------------------------------->				
+				<% name = section_names[3] %>
+				<% tag = section_tags[3] %>
+				<% number_of_posts = 4 %>
+
 				<div class="trending-posts">
 					<div class="gn-line"></div>
 					<div class="section-title">
-						<h4><a href="#"><%= section_names[3] %></a></h4>
+						<h4><a href="#"><%= name %></a></h4>
 					</div>
-					<% i = 0 %>
-					<% tag = section_tags[3] %>
-					<% current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').joins('LEFT JOIN "term_relationships" as "tag_rel" ON "posts"."id" = tag_rel."objectid" LEFT JOIN "term_taxonomy" as "tags" on tags.id = tag_rel.term_taxonomy_id').where(tags:{slug: tag}).order(value: :desc)).limit(4).decorate.each do |post| %>
+					<% current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').joins('LEFT JOIN "term_relationships" as "tag_rel" ON "posts"."id" = tag_rel."objectid" LEFT JOIN "term_taxonomy" as "tags" on tags.id = tag_rel.term_taxonomy_id').where(tags:{slug: tag}).order(value: :desc)).limit(number_of_posts).decorate.each do |post| %>
 						<div class="one-fourth gn-animation" data-animation="fadeInUp" data-animation-delay="0" data-animation-offset="75%">
 							<article class="post first">
 								<div class="thumb">
@@ -394,23 +463,27 @@
 						</div>
 					<% end %>
 				</div><!-- /.trending-posts -->
+				<!---------------------------------- End of Section #5 --------------------------------->
 				<div class="gn-line"></div>
 			</div><!-- /.col-md-12 -->
 			<div class="col-md-8">
+				<!------------------------------------- Section #6 ------------------------------------->
+				<% name = section_names[6] %>
+				<% tag = section_tags[6] %>
+				<% number_of_posts = 4 %>
+
 				<div class="social-media-posts gn-animation" data-animation="fadeInUp" data-animation-delay="0" data-animation-offset="75%">
 					<div class="section-title">
-						<h4><a href="#"><%= section_names[3] %></a></h4>
+						<h4><a href="#"><%= name %></a></h4>
 					</div>
-					<% i = 0 %>
-					<% tag = section_tags[3] %>
-					<% current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').joins('LEFT JOIN "term_relationships" as "tag_rel" ON "posts"."id" = tag_rel."objectid" LEFT JOIN "term_taxonomy" as "tags" on tags.id = tag_rel.term_taxonomy_id').where(tags:{slug: tag}).order(value: :desc)).limit(4).decorate.each do |post| %>
+					<% current_site.the_posts('post').joins(:custom_field_values).reorder(nil).merge(CamaleonCms::CustomFieldsRelationship.reorder(nil).where(custom_field_slug: 'post-date').joins('LEFT JOIN "term_relationships" as "tag_rel" ON "posts"."id" = tag_rel."objectid" LEFT JOIN "term_taxonomy" as "tags" on tags.id = tag_rel.term_taxonomy_id').where(tags:{slug: tag}).order(value: :desc)).limit(number_of_posts).decorate.each do |post| %>
 						<article class="post">
 							<div class="thumb">
 							<a href="<%= post.the_url %>"><img src=<%= post.the_thumb_url(theme_asset_url('images/thumbs/6.jpg')) %> alt="img"></a>
 							</div>
 							<div class="content">
 								<div class="cat">
-									<a href="#"><%= section_names[3] %></a>
+									<a href="#"><%= name %></a>
 								</div>
 								<h3><a href="<%= post.the_url %>"><%= post.the_title %></a></h3>
 								<p class="excerpt-entry"><%= post.the_excerpt %>.</p>
@@ -421,9 +494,11 @@
 						</article><!--  /.post -->
 					<% end %>
 				</div><!-- /.social-media-posts -->
+				<!---------------------------------- End of Section #6 --------------------------------->
 			</div><!-- /.col-md-8 -->
 		</div><!-- /.row -->
 	</div><!-- /.container -->
+	<!-- End of Container -->
 </section>
 
 
