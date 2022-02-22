@@ -35,8 +35,8 @@
                     <a class="dislike" href="#">I did not find this helpful</a>
                   </div>
                   <div class="tags">
-                    <% @post.the_tags.each do |tag| %>
-                      <a href="#"><%= tag.name.capitalize %></a>
+                    <% @post.the_tags.decorate.each do |tag| %>
+                      <a href="<%= tag.the_url %>"><%= tag.the_title %></a>
                     <% end %>
                   </div>
                 </div><!-- /.help-post -->

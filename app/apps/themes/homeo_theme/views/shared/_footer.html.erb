@@ -8,17 +8,16 @@
 							<div class="logo logo-footer">
 								<%= image_tag(theme_asset_url("images/homeoagora-logo.png"), :alt => "homeoagora") %>
 							</div>
-							<p>Meeting of Equals. Make Homeopathy great again!</p>
+							<p><%= current_site.the_title %></p>
 						</div><!-- /.widget-brand -->
 						<div class="widget widget-social">
 							<h5 class="widget-title">Follow Us</h5>
 							<div class="social-list">
-								<a href="#"><%= image_tag(theme_asset_url("images/facebook.svg"), :alt => "facebook") %></a>
-								<a href="#"><%= image_tag(theme_asset_url("images/twitter.svg"), :alt => "twitter") %></a>
-								<a href="#"><%= image_tag(theme_asset_url("images/youtube.svg"), :alt => "youtube") %></a>
-								<a href="#"><%= image_tag(theme_asset_url("images/dribbble.svg"), :alt => "dribbble") %></a>
+								<% current_theme.the_fields_grouped(['social_network_class', 'social_network_url','social_network_name']).each do |group| %>
+									<a href="<%= group['social_network_url'][0] %>"><%= image_tag(theme_asset_url("images/#{group['social_network_name'][0].downcase}.svg"), :alt => "#{group['social_network_name'][0]}") %></a>
+							  	<% end %>								
 							</div>
-							<a class="email" href="#">info@homeoagora.com</a>
+							<a class="email" href="#"><%= current_theme.get_option('email_info', 'default_email@example.com') %></a>
 						</div><!-- /.widget-social -->
 					</div><!-- /.col-md-4 -->
 					<div class="col-md-4" data-animation="fadeInUp" data-animation-delay="0.2s" data-animation-offset="75%">
@@ -39,13 +38,11 @@
 					</div><!-- /.col-md-2 -->
 					<div class="col-md-2" data-animation="fadeInUp" data-animation-delay="0.6s" data-animation-offset="75%">
 						<div class="widget widget-list">
-							<h5 class="widget-title">About Us</h5>
-							<ul class="links-list">
-								<li><a href="#">About Us</a></li>
-								<li><a href="#">Our Team</a></li>
-								<li><a href="#">Careers </a></li>
-								<li><a href="#">Advertise</a></li>
-								<li><a href="#">Copyright</a></li>
+							<h5 class="widget-title"><%= current_theme.the_field('home_main_site_map', 'Map of the site') %></h5>
+							<ul>
+								<% cama_menu_parse_items(current_site.nav_menus.find_by_slug('main_menu').children).each do |item| %>
+									<li><a href="<%= item[:url] %>"><%= item[:label] %></a></li>
+								<% end %>
 							</ul>
 						</div><!-- /.widget-list -->
 					</div><!-- /.col-md-2 -->
@@ -56,7 +53,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						&copy; 2018 Homeoagora.
+					Copyright <%= current_site.the_title %> &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</a>
 					</div><!-- /.col-md-12 -->
 				</div><!-- /.row -->
 			</div><!-- /.container -->
