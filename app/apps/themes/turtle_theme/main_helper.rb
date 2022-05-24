@@ -47,6 +47,11 @@ module Themes::TurtleTheme::MainHelper
       group.add_field({"name"=>"Class", "slug"=>"social_network_class"},{field_key: "text_box"})
       group.add_field({"name"=>"URL", "slug"=>"social_network_url"},{field_key: "url"})
     end
+    unless theme.get_field_groups.where(slug: "unomia").any?
+      group = theme.add_field_group({name: "Unomia Settings", is_repeat: true, slug: "unomia", description: ""})
+      group.add_field({"name"=>"Title", "slug"=>"unomia_title"},{field_key: "text_box", translate: true})
+      group.add_field({"name"=>"Description", "slug"=>"unomia_description"},{field_key: "text_box", translate: true})
+   end
     # # Sample Meta Value
     # theme.set_meta("installed_at", Time.current.to_s) # save a custom value
   end
