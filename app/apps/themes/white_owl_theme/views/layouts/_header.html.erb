@@ -1,12 +1,19 @@
 <div class="header-area">
     <div class="main-header ">
+        <div class="container-fluid" style="background:black;height:50px">
+            <div style="padding:10px 10px 20px 20px;" >
+                <%= raw current_site.draw_languages("language list-inline pull-left", true) %>
+            </div>
+        </div>
+    </div>
+    <div class="main-header ">
         <div class="header-bottom  header-sticky">
             <div class="container-fluid">
                 <div class="row align-items-center">
                     <!-- Logo -->
                     <div class="col-xl-2 col-lg-2">
                         <div class="logo">
-                            <a href="<%= current_site.the_url %>"><img src="<%= current_site.the_logo(theme_asset_url('img/logo/logo.png')) %>" alt=" " /></a>
+                            <a href="<%= current_site.the_url %>"><img src="<%= current_site.the_logo(theme_asset_url('img/logo/logo.png')) %>" width="400" height="50" alt=" " /></a>
                         </div>
                         
                     </div>
@@ -29,7 +36,6 @@
                                                 <li><a href="<%= item[:url] %>"><%= item[:label] %></a></li>
                                             <% end %>
                                         <% end %>                                                                                          
-                                        <li><%= raw current_site.draw_languages("language list-inline pull-right", true) %></li>
                                     </ul>
                                 </nav>
                             </div>
