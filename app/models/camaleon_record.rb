@@ -4,6 +4,12 @@ class CamaleonRecord < ActiveRecord::Base
   include ActiveRecordExtras::Relation
 
   self.abstract_class = true
+  if PluginRoutes.static_system_info['use_uuid']
+    before_create :set_uuid
+    def set_uuid
+      self.id = SecureRandom.uuid
+    end
+  end
 
   # save cache value for this key
   def cama_set_cache(key, val)

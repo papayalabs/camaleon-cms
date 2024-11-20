@@ -1,6 +1,7 @@
 module CamaleonCms
   class TermRelationship < CamaleonRecord
     self.table_name = "#{PluginRoutes.static_system_info['db_prefix']}term_relationships"
+    self.primary_key = :id if PluginRoutes.static_system_info['use_uuid']
     default_scope -> { order(term_order: :asc) }
 
     belongs_to :term_taxonomy, inverse_of: :term_relationships, required: false

@@ -4,6 +4,7 @@ module CamaleonCms
     include CamaleonCms::CommonRelationships
 
     self.table_name = "#{PluginRoutes.static_system_info['db_prefix']}comments"
+    self.primary_key = :id if PluginRoutes.static_system_info['use_uuid']
     # attr_accessible :user_id, :post_id, :content, :author, :author_email, :author_url, :author_IP, :approved, :agent, :agent, :typee, :comment_parent, :is_anonymous
     attr_accessor :is_anonymous
 

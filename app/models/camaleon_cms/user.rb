@@ -4,6 +4,7 @@ unless PluginRoutes.static_system_info['user_model'].present?
       include CamaleonCms::UserMethods
 
       self.table_name = PluginRoutes.static_system_info['cama_users_db_table'] || "#{PluginRoutes.static_system_info['db_prefix']}users"
+      self.primary_key = :id if PluginRoutes.static_system_info['use_uuid']
 
       default_scope { order(role: :asc) }
 

@@ -2,6 +2,7 @@
 module CamaleonCms
   class PostRelationship < CamaleonRecord
     self.table_name = "#{PluginRoutes.static_system_info['db_prefix']}term_relationships"
+    self.primary_key = :id if PluginRoutes.static_system_info['use_uuid']
     # attr_accessible :objectid, :term_taxonomy_id, :term_order
     default_scope -> { order(term_order: :asc) }
 

@@ -12,6 +12,7 @@ module CamaleonCms
     end
 
     self.table_name = "#{PluginRoutes.static_system_info['db_prefix']}posts"
+    self.primary_key = :id if PluginRoutes.static_system_info['use_uuid']
 
     # attr_accessible :user_id, :title, :slug, :content, :content_filtered, :status,  :visibility, :visibility_value, :post_order, :post_type_key, :taxonomy_id, :published_at, :post_parent, :post_order, :is_feature
     attr_accessor :draft_id

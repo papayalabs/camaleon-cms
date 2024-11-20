@@ -4,8 +4,8 @@ class PostTableIntoUtf8 < CamaManager.migration_class
       add_column(CamaleonCms::User.table_name, :email, :string) unless column_exists?(CamaleonCms::User.table_name, :email)
       add_column(CamaleonCms::User.table_name, :username, :string) unless column_exists?(CamaleonCms::User.table_name, :username)
       add_column(CamaleonCms::User.table_name, :role, :string, default: 'client', index: true) unless column_exists?(CamaleonCms::User.table_name, :role)
-      add_column(CamaleonCms::User.table_name, :parent_id, :integer) unless column_exists?(CamaleonCms::User.table_name, :parent_id)
-      add_column(CamaleonCms::User.table_name, :site_id, :integer, index: true, default: -1) unless column_exists?(CamaleonCms::User.table_name, :site_id)
+      add_column(CamaleonCms::User.table_name, :parent_id, PluginRoutes.static_system_info['use_uuid'] ?  :string : :integer) unless column_exists?(CamaleonCms::User.table_name, :parent_id)
+      add_column(CamaleonCms::User.table_name, :site_id, PluginRoutes.static_system_info['use_uuid'] ?  :string : :integer, index: true, default: -1) unless column_exists?(CamaleonCms::User.table_name, :site_id)
       add_column(CamaleonCms::User.table_name, :auth_token, :string) unless column_exists?(CamaleonCms::User.table_name, :auth_token)
     else
       create_table CamaleonCms::User.table_name do |t|
@@ -16,7 +16,11 @@ class PostTableIntoUtf8 < CamaManager.migration_class
         t.string   "password_digest"
         t.string   "auth_token"
         t.string   "password_reset_token"
-        t.integer  "parent_id"
+        if PluginRoutes.static_system_info['use_uuid']
+          t.string  "parent_id"
+        else
+          t.integer  "parent_id"
+        end
         t.datetime "password_reset_sent_at"
         t.datetime "last_login_at"
 
@@ -29,7 +33,11 @@ class PostTableIntoUtf8 < CamaManager.migration_class
     create_table "#{PluginRoutes.static_system_info["db_prefix"]}term_taxonomy" do |t|
       t.string   "taxonomy", index: true
       t.text     "description", limit: 1073741823
-      t.integer  "parent_id", index: true
+      if PluginRoutes.static_system_info['use_uuid']
+        t.string  "parent_id", index: true
+      else
+        t.integer  "parent_id", index: true
+      end
       t.integer  "count"
       t.string   "name"
       t.string   "slug", index: true
@@ -49,7 +57,11 @@ class PostTableIntoUtf8 < CamaManager.migration_class
       t.string   "status", default: "published", index: true
       t.integer  "comment_count", default: 0
       t.datetime "published_at"
-      t.integer  "post_parent", index: true
+      if PluginRoutes.static_system_info['use_uuid']
+        t.string "post_parent", index: true
+      else
+        t.integer  "post_parent", index: true
+      end
       t.string   "visibility", default: "public"
       t.text     "visibility_value"
       t.string   "post_class", default: "Post", index: true
@@ -59,7 +71,12 @@ class PostTableIntoUtf8 < CamaManager.migration_class
     end
 
     create_table "#{PluginRoutes.static_system_info["db_prefix"]}term_relationships" do |t|
-      t.integer "objectid", index: true
+      if PluginRoutes.static_system_info['use_uuid']
+        t.string   "id", :limit => 36, :primary => true
+        t.string "objectid", index: true
+      else
+        t.integer "objectid", index: true
+      end
       t.integer "term_order", index: true
       t.belongs_to :term_taxonomy, index: true
     end
@@ -91,8 +108,14 @@ class PostTableIntoUtf8 < CamaManager.migration_class
       t.string  "object_class", index: true
       t.string  "name"
       t.string  "slug", index: true
-      t.integer  "objectid", index: true
-      t.integer "parent_id", index: true
+      t.integer "term_order"
+      if PluginRoutes.static_system_info['use_uuid']
+        t.string "objectid", index: true
+        t.string "parent_id", index: true
+      else
+        t.integer  "objectid", index: true
+        t.integer "parent_id", index: true
+      end
       t.integer "field_order"
       t.integer "count", default: 0
       t.boolean "is_repeat", default: false
@@ -112,7 +135,11 @@ class PostTableIntoUtf8 < CamaManager.migration_class
     create_table "#{PluginRoutes.static_system_info["db_prefix"]}metas" do |t|
       t.string  "key", index: true
       t.text    "value", limit: 1073741823
-      t.integer "objectid", index: true
+      if PluginRoutes.static_system_info['use_uuid']
+        t.string "objectid", index: true
+      else 
+        t.integer "objectid", index: true
+      end
       t.string  "object_class", index: true
     end
 
